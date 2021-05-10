@@ -27,16 +27,8 @@ h6 {
 }
 
 #school_slant {
-  width: 90%;
+  width: 100%;
 }
-
-
-@media (min-width: 768px) {
-  #school_slant {
-    width: 100%;
-  }
-}
-
 
 
 #scroll_vid_top {
