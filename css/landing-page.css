@@ -170,13 +170,13 @@ section {
 
 @media (min-width: 768px) {
   #qr {
-    width: 60%;
+    width: 70%;
     margin-top: 0px;
   }
 
   #qr_wrapper {
-    display: flex; 
-    align-items: left;
+    /*display: flex; */
+    /*align-items: center;*/
   }
 
 }
