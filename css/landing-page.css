@@ -23,9 +23,30 @@ h6 {
   font-size: 15px;
   font-weight: bold;
   color: #27bd82;
+  text-align: center;
 }
 
 .qr_text {
+  font-family:avenir;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.skip_text {
+  font-family:avenir;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.desc_text_highlighted {
+  font-family:avenir;
+  font-size: 15px;
+  font-weight: bold;
+  color: #27bd82;
+}
+
+.desc_text {
   font-family:avenir;
   font-size: 15px;
   font-weight: bold;
@@ -33,11 +54,73 @@ h6 {
 
 @media (min-width: 768px) {
   .qr_text_highlighted {
+    font-size: 17px;
+    text-align: right;
+  }
+
+  .qr_text {
+    font-size: 17px;
+    text-align: right;
+  }
+
+  .skip_text {
+    font-size: 16px;
+  }
+
+  .desc_text_highlighted {
+    font-size: 18px;
+  }
+
+  .desc_text {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .qr_text_highlighted {
+    font-size: 23px;
+    text-align: right;
+  }
+
+  .qr_text {
+    font-size: 23px;
+    text-align: right;
+  }
+
+  .skip_text {
+    font-size: 18px;
+  }
+
+  .desc_text_highlighted {
+    font-size: 22px;
+  }
+
+  .desc_text {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .qr_text_highlighted {
     font-size: 25px;
+    text-align: right;
   }
 
   .qr_text {
     font-size: 25px;
+    text-align: right;
+  }
+
+  .skip_text {
+    font-size: 20px;
+  }
+
+  .desc_text_highlighted {
+    font-size: 22px;
+  }
+
+  .desc_text {
+    font-size: 18px;
   }
 }
 
@@ -50,7 +133,13 @@ h6 {
 }
 
 #qr {
-  width: 100%;
+  width: 75%;
+  margin-top: 20px;
+}
+
+#qr_wrapper {
+  display: block; 
+  align-items: center;
 }
 
 #appstore {
@@ -77,6 +166,19 @@ section {
     /*align-items: center;*/
     justify-content: center;
   }
+}
+
+@media (min-width: 768px) {
+  #qr {
+    width: 60%;
+    margin-top: 0px;
+  }
+
+  #qr_wrapper {
+    display: flex; 
+    align-items: left;
+  }
+
 }
 
 section {
