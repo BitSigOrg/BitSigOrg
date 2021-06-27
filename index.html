@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TL8GNHF3XS"></script>
@@ -101,9 +100,9 @@
         <div class="row mx-auto mb-1 mt-4">
             <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
                 <p class="desc_text_highlighted">What's BitSig?</p>
-                <p class="desc_text">BitSig enables new types of NFTs that can be signed. Since NFTs can't be duplicated, they act like physical objects. Just like physical objects can be signed, an NFT should be signable too.</p>
+                <p class="desc_text">BitSig enables new types of NFTs that can be signed for free. Digital objects are now signable, just like physical ones.</p>
                 <br/>
-                <p class="desc_text">With BitSig, you can create NFTs that are signable for free by anyone. If someone famous signs your NFT, it becomes more valuable just like a soccer ball does when your favorite soccer player signs it.</p>
+                <p class="desc_text">If someone important signs your NFT, it becomes more valuable just like a soccer ball does when your favorite soccer player signs it.</p>
                 <br/>
                 <p class="desc_text">If you sign someone else's NFT, you can get a percentage of the NFT's sale, every time it's sold.</p>
             </div>
@@ -115,12 +114,8 @@
       <div class="container">
         <div class="row mx-auto mb-1 mt-4">
             <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">How do I sign an NFT?</p>
-                <p class="desc_text">Signing an NFT with BitSig is very easy. Simply scan the QR code of the token with the app and it automatically signs it.</p>
-                <br/>
-                <p class="desc_text">If you don't have the app, you can connect your wallet to this website and sign it here.</p>
-                <br/>
-                <p class="desc_text">There's no cost to sign anything and it only takes a matter of seconds. When the token you signed is sold, you can get a percentage of the sale deposited to your BitSig app.</p>
+                <p class="desc_text_highlighted">Community</p>
+                <p class="desc_text">Ultimately, what gives an NFT value is its community. BitSig makes the connection between a token and its community explicit. The more signatures a token has, the more valuable it is to the community.</p>
             </div>
         </div>
       </div>
@@ -130,8 +125,10 @@
       <div class="container">
         <div class="row mx-auto mb-1 mt-4">
             <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">Why did we create it?</p>
-                <p class="desc_text">There is no existing way to sign NFT's easily and for free. Your favorite artist can sign your shirt, but not your NFT. With BitSig, we want to bring signatures over to the virtual world.</p>
+                <p class="desc_text_highlighted">How do I sign an NFT?</p>
+                <p class="desc_text">Signing an NFT with BitSig is very easy (and free). Simply scan the QR code of the token with the app and it automatically signs it.</p>
+                <br/>
+                <p class="desc_text">If you don't have the app, you can connect your wallet to the website and sign it there.</p>
             </div>
         </div>
       </div>
@@ -142,7 +139,7 @@
         <div class="row mx-auto mb-1 mt-4">
             <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
                 <p class="desc_text_highlighted">If you're a fan...</p>
-                <p class="desc_text">Create fan art for your favorite artist to sign for free. The NFT with your art gets valuable when your favorite artist signs it. If you choose to sell it, you can support the artist by giving them a portion of the sale automatically.</p>
+                <p class="desc_text">Create fan art for your favorite artist to sign for free. The NFT with your art gets valuable when your favorite artist signs it. If you choose to sell it, you can support the artist by giving them a royalty.</p>
             </div>
         </div>
       </div>
@@ -153,7 +150,33 @@
         <div class="row mx-auto mb-1 mt-4">
             <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
                 <p class="desc_text_highlighted">If you're an artist/creator...</p>
-                <p class="desc_text">Connect with your fans by creating an NFT for them to sign. When you sell the NFT to a super fan, you can give back to the community of fans that supported you by giving them a portion of the sale.</p>
+                <p class="desc_text">Connect with your fans by creating an NFT for them to sign. When you sell the NFT to a super fan, you can give back to the community of fans that supported you with a signers royalty.</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row mx-auto mb-1 mt-4">
+            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
+                <p class="desc_text_highlighted">If you're a conducting business...</p>
+                <p class="desc_text">Create an NFT of a contract and easily have it signed by all parties involved. The signatures will be on the NFT forever, even if BitSig.org shuts down.</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row mx-auto mb-1 mt-4">
+            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
+                <p class="desc_text_highlighted">How does it work?</p>
+                <p class="desc_text">When signing a token, the BitSig app (or your wallet) signs a message under the format:</p><p class="desc_text" style="color: rgb(120, 120, 120)">"contractAddress:address_tokenId:ID",</p><p class="desc_text">which is a unique identifier of the token. The message, digital signature, and your public key are added to a file holding all of the signatures so that anyone can verify them. <a href="https://etherscan.io/verifySig">https://etherscan.io/verifySig</a></p>
+                <br/>
+                <p class="desc_text">The file that has all of the signatures is stored on ipfs. When more signers sign, a new file is created that includes the new signers. The new file has a link that points back to the previous file. BitSig creates the files and keeps track of the link to the latest file. The token itself can also hold the link to the latest file. By continuously setting the latest link in the token, a history of the signer files is held in the blockchain,  which ensures the validity of the chain of files. </p>
+                <br/>
+                <p class="desc_text">For extra security, signatures can be added directly to the token. This is, however, will cost gas payable by either the token owner or the signer.</p>
             </div>
         </div>
       </div>
