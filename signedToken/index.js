@@ -4,6 +4,21 @@
  * Example JavaScript code that interacts with the page and Web3 wallets
  */
 
+ var firebaseConfig = {
+    apiKey: "AIzaSyB7aosAnOr4k0lgPPlR11vAA267hhEqh64",
+    authDomain: "bitsig-21bf7.firebaseapp.com",
+    databaseURL: "https://bitsig-21bf7-default-rtdb.firebaseio.com",
+    projectId: "bitsig-21bf7",
+    storageBucket: "bitsig-21bf7.appspot.com",
+    messagingSenderId: "384266527311",
+    appId: "1:384266527311:web:67a36d8fb27980158bc03a",
+    measurementId: "G-H2NJN65ETF"
+  };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
  // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
 const WalletConnectProvider = window.WalletConnectProvider.default;
