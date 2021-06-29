@@ -13,7 +13,7 @@
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+// firebase.analytics();
 
  // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
