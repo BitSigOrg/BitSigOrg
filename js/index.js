@@ -195,7 +195,7 @@ function sendVerificationCode() {
 async function sign() {
   const web3 = new Web3(provider);
   const accounts = await web3.eth.getAccounts();
-  var message = "Some string"
+  var message = "contractAddress:abcd_tokenId:1"
   var hash = web3.utils.sha3(message)
 
   var sign_modal = document.getElementById("askForSignModal");

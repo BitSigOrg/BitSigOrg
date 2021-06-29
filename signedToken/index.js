@@ -202,7 +202,7 @@ window.addEventListener('load', async () => {
           } else {
             firebase.database().ref('tokens').child("1").child("signer_users").child(user.uid).set({
               ethereum_address: ethaddress,
-              message: "msg",
+              message: "contractAddress:abcd_tokenId:1",
               name: name,
               signature: signature,
               num_signer: 1
