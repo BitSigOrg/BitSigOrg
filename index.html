@@ -28,6 +28,10 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 
   <!-- Custom styles for this template -->
   <link href="css/landing-page.css" rel="stylesheet">
@@ -63,20 +67,49 @@
             <a href="signers/index.html"><p class="signers_text">See who's signed it <i class="fas fa-angle-right"></i></p></a>
           </div>
         </div>
-        <div class="row mx-auto mb-3 mt-4">
-          <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
-            <a href="https://apps.apple.com/in/app/bitsig/id1566975289"><img src="img/coming_soon.png" style="width: 160px;"/></a>
+        <div class="row mx-auto mb-1 mt-4">
+          <div class="col-lg-6 col-md-6 my-auto" id="app-beta-container">
+            <button id="app-beta">Sign with the App</button>
           </div>
     <!--       <div class="col-lg-8 col-md-8 text-left my-auto mx-auto">
             <p class="skip_text">Skip the waitlist with the code "first1000".</p>
           </div> -->
+          <div class="col-lg-6 col-md-6 my-auto mx-auto" id="btn-connect-container">
+            <button class="connect_wallet" id="btn-connect">Sign without the App</button>
+          </div>
+          <div class="col-lg-6 col-md-6 my-auto mx-auto" id="sign-button-container">
+            <button id="sign_button">Sign with wallet</button>
+          </div>
         </div>
+        <div class="row mx-auto mb-3 mt-4">
+          <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+            <button class="disconnect_wallet" id="btn-disconnect">Disconnect wallet</button>
+          </div>
+        </div>
+        <div class="row mx-automt-4">
+          <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+            <p><strong id="blockchain_status">Connected blockchain:</strong> <span id="network-name"></span></p>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section>
       <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
+        
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="row mx-auto mb-1 mt-1">
             <div class="col-lg-10 col-md-10 my-auto mx-auto" style="background-color: rgb(200, 200, 200); height: 1px;"></div>
         </div>
       </div>
@@ -128,7 +161,7 @@
                 <p class="desc_text_highlighted">How do I sign an NFT?</p>
                 <p class="desc_text">Signing an NFT with BitSig is very easy (and free). Simply scan the QR code of the token with the app and it automatically signs it.</p>
                 <br/>
-                <p class="desc_text">If you don't have the app, you can connect your wallet to the website and sign it there.</p>
+                <p class="desc_text">If you don't have the app, you can connect your wallet and sign it there.</p>
             </div>
         </div>
       </div>
@@ -181,9 +214,38 @@
         </div>
       </div>
     </section>
+  </main>
+
+  <div id="signUpModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="row mx-auto mb-3 mt-4">
+        <input type="email" id="modal-email" class="modal-text" placeholder="Email (required)"/>
+      </div>
+      <div class="row mx-auto mb-2">
+        <input id="modal-name" class="modal-text" placeholder="Name (optional)"/>
+      </div>
+      <div class="row mx-auto mb-2" id="modal-verification-info-container">
+        <p id="modal-verification-info"></p>
+      </div>
+      <div class="row mx-auto mb-3" id="modal-verification-container">
+        <input id="modal-verification" class="modal-text" placeholder="Verification Code"/>
+      </div>
+      <div class="row mx-auto mt-5 mb-5" id="modal-continue-container">
+        <button class="modal-button" id="modal-continue">Continue</button>
+      </div>
+      <div class="row mx-auto mt-5" id="modal-sign-container">
+        <button class="modal-button" id="modal-sign">Finish Signing</button>
+      </div>
+      <div class="row mx-auto mb-2" id="modal-resend-container">
+        <button id="modal-resend">Resend</button>
+      </div>
+    </div>
+  </div> 
+
 
   <!-- Footer -->
-  <footer class="footer"
+  <footer class="footer">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 h-100 text-center my-auto mx-auto">
@@ -211,6 +273,12 @@
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/web3@1.2.11/dist/web3.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/web3modal@1.9.0/dist/index.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.2.1/dist/umd/index.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/fortmatic@2.0.6/dist/fortmatic.js"></script>
+  <script type="text/javascript" src="./js/index.js"></script>
 
 </body>
 </html>

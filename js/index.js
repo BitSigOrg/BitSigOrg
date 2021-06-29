@@ -1,8 +1,19 @@
 "use strict";
 
-/**
- * Example JavaScript code that interacts with the page and Web3 wallets
- */
+var firebaseConfig = {
+    apiKey: "AIzaSyB7aosAnOr4k0lgPPlR11vAA267hhEqh64",
+    authDomain: "bitsig-21bf7.firebaseapp.com",
+    databaseURL: "https://bitsig-21bf7-default-rtdb.firebaseio.com",
+    projectId: "bitsig-21bf7",
+    storageBucket: "bitsig-21bf7.appspot.com",
+    messagingSenderId: "384266527311",
+    appId: "1:384266527311:web:67a36d8fb27980158bc03a",
+    measurementId: "G-H2NJN65ETF"
+  };
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
  // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
@@ -124,7 +135,7 @@ async function fetchAccountData() {
   // await Promise.all(rowResolvers);
 
   // Display fully loaded UI for wallet data
-  document.querySelector("#btn-connect").style.display = "none";
+  document.querySelector("#btn-connect-container").style.display = "none";
   document.querySelector("#btn-disconnect").style.display = "inline";
   document.querySelector("#blockchain_status").style.display = "inline";
   document.querySelector("#sign_button").style.display = "inline";
@@ -139,16 +150,35 @@ async function finishSigning() {
   alert(signature);
 }
 
-function verificationCode() {
-  document.querySelector("#modal-email").style.display = "none";
-  document.querySelector("#modal-name").style.display = "none";
-  document.querySelector("#modal-continue-container").style.display = "none";
+function sendVerificationCode() {
+  let email = document.getElementById("modal-email").value;
+  var actionCodeSettings = {
+    // URL you want to redirect back to. The domain (www.example.com) for this
+    // URL must be in the authorized domains list in the Firebase Console.
+    url: 'bitsig.org/tokenSigned'
+  };
+  firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+  .then(() => {
+    // The link was successfully sent. Inform the user.
+    // Save the email locally so you don't need to ask the user for it again
+    // if they open the link on the same device.
+    window.localStorage.setItem('emailForSignIn', email);
+    
+    document.querySelector("#modal-email").style.display = "none";
+    document.querySelector("#modal-name").style.display = "none";
+    document.querySelector("#modal-continue-container").style.display = "none";
 
-  document.querySelector("#modal-verification-container").style.display = "inline";
-  document.querySelector("#modal-verification-info").innerHTML = "Enter the verification code sent<br/>to " + document.getElementById("modal-email").value;
-  document.querySelector("#modal-verification-info-container").style.display = "inline";
-  document.querySelector("#modal-resend-container").style.display = "inline";
-  document.querySelector("#modal-sign-container").style.display = "inline";
+    document.querySelector("#modal-verification-container").style.display = "inline";
+    document.querySelector("#modal-verification-info").innerHTML = "Enter the verification code sent<br/>to " + document.getElementById("modal-email").value;
+    document.querySelector("#modal-verification-info-container").style.display = "inline";
+    document.querySelector("#modal-resend-container").style.display = "inline";
+    document.querySelector("#modal-sign-container").style.display = "inline";
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // ...
+  });
 }
 
 // can ask if they want to be on the token too
@@ -174,9 +204,10 @@ async function refreshAccountData() {
   // the user is switching acounts in the wallet
   // immediate hide this data
   document.querySelector("#btn-disconnect").style.display = "none";
-  document.querySelector("#btn-connect").style.display = "inline";
+  document.querySelector("#btn-connect-container").style.display = "inline";
   document.querySelector("#blockchain_status").style.display = "none";
   document.querySelector("#sign_button").style.display = "none";
+  document.querySelector("#blockchain_status").style.display = "none";
 
   // Disable button while UI is loading.
   // fetchAccountData() will take a while as it communicates
@@ -243,7 +274,7 @@ async function onDisconnect() {
   selectedAccount = null;
 
   // Set the UI back to the initial state
-  document.querySelector("#btn-connect").style.display = "inline";
+  document.querySelector("#btn-connect-container").style.display = "inline";
   document.querySelector("#btn-disconnect").style.display = "none";
   document.querySelector("#blockchain_status").style.display = "none";
   document.querySelector("#sign_button").style.display = "none";
@@ -258,7 +289,7 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#sign_button").addEventListener("click", sign);
-  document.querySelector("#modal-continue").addEventListener("click", verificationCode);
+  document.querySelector("#modal-continue").addEventListener("click", sendVerificationCode);
   document.querySelector("#modal-resend").addEventListener("click", resendCode);
   document.querySelector("#modal-sign").addEventListener("click", finishSigning);
 

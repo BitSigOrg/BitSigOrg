@@ -31,7 +31,7 @@ h6 {
   background-color: rgb(0,0,0,0.4); /* Fallback color */
 }
 
-.modal-button {
+.modal-text {
   height: 50px;
   /*text-align: center;*/
   border-radius: 0px;
@@ -40,11 +40,62 @@ h6 {
   border-bottom-width: 1px;
 }
 
+.modal-text:focus {
+  outline:0;
+}
+
+#modal-verification-info {
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+#modal-sign-container {
+  display: none;
+}
+
+#modal-resend-container {
+  display: none;
+}
+
+#modal-verification-info-container {
+  display: none;
+}
+
+#modal-verification-container {
+  display: none;
+}
+
+#modal-resend {
+  width: 200px;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  background-color: rgb(255,255,255,0);
+}
+
+#modal-resend:focus {
+  outline:0;
+}
+
+#modal-resend:hover {
+  outline:0;
+  color: rgb(70,70,70);
+}
+
+#modal-resend:active {
+  color: rgb(0,0,0);
+}
+
 .modal-button:focus {
   outline:0;
 }
 
-#modal-sign {
+.modal-button {
   width: 200px;
   border-width: 0;
   border-radius: 10px;
@@ -55,18 +106,14 @@ h6 {
   background-color: #00a66c;
 }
 
-#modal-sign:focus {
-  outline:0;
-}
-
-#modal-sign:active {
+.modal-button:active {
   outline:0;
   background-color: #009964;
   -webkit-box-shadow: 0px 0px 17px 1px #00a66c; 
   box-shadow: 0px 0px 17px 1px #00a66c;
 }
 
-#modal-sign:hover {
+.modal-button:hover {
   outline:0;
   -webkit-box-shadow: 0px 0px 20px 1px #00a66c; 
   box-shadow: 0px 0px 20px 1px #00a66c;

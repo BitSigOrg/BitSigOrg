@@ -18,6 +18,277 @@ h6 {
   font-weight: 700;
 }
 
+#app-beta-container {
+  display: flex; 
+  justify-content: center;
+  padding-bottom: 15px;
+}
+
+#btn-connect-container {
+  display: flex; 
+  justify-content: center;
+}
+
+#sign-button-container {
+  display: flex; 
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  #app-beta-container {
+    display: flex; 
+    justify-content: flex-end;
+    padding-bottom: 0px;
+  }
+
+  #btn-connect-container {
+    display: flex; 
+    justify-content: flex-start;
+  }
+
+  #sign-button-container {
+    display: flex; 
+    justify-content: flex-start;
+  }
+}
+
+#signUpModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0,0.4); /* Fallback color */
+}
+
+.modal-text {
+  height: 50px;
+  /*text-align: center;*/
+  border-radius: 0px;
+  border-width: 0px;
+  border-color: rgb(200,200,200);
+  border-bottom-width: 1px;
+}
+
+.modal-text:focus {
+  outline:0;
+}
+
+#modal-verification-info {
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+#modal-sign-container {
+  display: none;
+}
+
+#modal-resend-container {
+  display: none;
+}
+
+#modal-verification-info-container {
+  display: none;
+}
+
+#modal-verification-container {
+  display: none;
+}
+
+#modal-resend {
+  width: 200px;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  background-color: rgb(255,255,255,0);
+}
+
+#modal-resend:focus {
+  outline:0;
+}
+
+#modal-resend:hover {
+  outline:0;
+  color: rgb(70,70,70);
+}
+
+#modal-resend:active {
+  color: rgb(0,0,0);
+}
+
+.modal-button:focus {
+  outline:0;
+}
+
+.modal-button {
+  width: 200px;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: #00a66c;
+}
+
+.modal-button:active {
+  outline:0;
+  background-color: #009964;
+  -webkit-box-shadow: 0px 0px 17px 1px #00a66c; 
+  box-shadow: 0px 0px 17px 1px #00a66c;
+}
+
+.modal-button:hover {
+  outline:0;
+  -webkit-box-shadow: 0px 0px 20px 1px #00a66c; 
+  box-shadow: 0px 0px 20px 1px #00a66c;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  border-radius: 20px;
+  border-width: 0px;
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  width: 80%;
+  /*height: 300px;*/
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    width: 300px;
+  }
+}
+
+/* The Close Button */
+.close {
+  visibility: hidden;
+}
+
+#blockchain_status {
+  display: none;
+}
+
+#app-beta {
+  width: 200px;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: black;
+}
+
+#app-beta:focus {
+  outline:0;
+}
+
+#app-beta:active {
+  outline:0;
+  background-color: rgb(40,40,40);
+  -webkit-box-shadow: 0px 0px 10px 1px black; 
+  box-shadow: 0px 0px 10px 1px black;
+}
+
+#app-beta:hover {
+  outline:0;
+  -webkit-box-shadow: 0px 0px 10px 1px black; 
+  box-shadow: 0px 0px 10px 1px black;
+}
+
+#sign_button {
+  display: none;
+  width: 200px;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: #00a66c;
+}
+
+#sign_button:focus {
+  outline:0;
+}
+
+#sign_button:active {
+  outline:0;
+  background-color: #009964;
+  -webkit-box-shadow: 0px 0px 17px 1px #00a66c; 
+  box-shadow: 0px 0px 17px 1px #00a66c;
+}
+
+#sign_button:hover {
+  outline:0;
+  -webkit-box-shadow: 0px 0px 20px 1px #00a66c; 
+  box-shadow: 0px 0px 20px 1px #00a66c;
+}
+
+.disconnect_wallet {
+  display: none;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  background-color: rgb(240,240,240,0);
+}
+
+.disconnect_wallet:focus {
+  outline:0;
+}
+
+.disconnect_wallet:active {
+  outline:0;
+  color: black;
+}
+
+.disconnect_wallet:hover {
+  color: rgb(100,100,100);
+}
+
+.connect_wallet {
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgb(240,240,240);
+}
+
+.connect_wallet:focus {
+  outline:0;
+}
+
+.connect_wallet:active {
+  outline:0;
+  background-color: rgb(230,230,230);
+  -webkit-box-shadow: 0px 0px 17px 1px rgb(210,210,210);
+  box-shadow: 0px 0px 17px 1px rgb(210,210,210);
+}
+
+.connect_wallet:hover {
+  outline:0;
+  -webkit-box-shadow: 0px 0px 20px 1px rgb(210,210,210);
+  box-shadow: 0px 0px 20px 1px rgb(210,210,210);
+}
+
 .qr_text_highlighted {
   font-family:avenir;
   font-size: 15px;
