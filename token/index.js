@@ -127,12 +127,18 @@ async function fetchAccountData() {
   document.querySelector("#btn-connect").style.display = "none";
   document.querySelector("#btn-disconnect").style.display = "inline";
   document.querySelector("#blockchain_status").style.display = "inline";
+  document.querySelector("#sign_button").style.display = "inline";
+}
 
+async function sign() {
+  const web3 = new Web3(provider);
+  const accounts = await web3.eth.getAccounts();
   var message = "Some string"
   var hash = web3.utils.sha3(message)
   var signature = await web3.eth.personal.sign(hash, accounts[0])
-  console.log(signature);
+  alert(signature);
 }
+
 
 
 
@@ -150,6 +156,7 @@ async function refreshAccountData() {
   document.querySelector("#btn-disconnect").style.display = "none";
   document.querySelector("#btn-connect").style.display = "inline";
   document.querySelector("#blockchain_status").style.display = "none";
+  document.querySelector("#sign_button").style.display = "none";
 
   // Disable button while UI is loading.
   // fetchAccountData() will take a while as it communicates
@@ -219,6 +226,7 @@ async function onDisconnect() {
  document.querySelector("#btn-connect").style.display = "inline";
  document.querySelector("#btn-disconnect").style.display = "none";
  document.querySelector("#blockchain_status").style.display = "none";
+ document.querySelector("#sign_button").style.display = "none";
 }
 
 
@@ -229,5 +237,6 @@ window.addEventListener('load', async () => {
   init();
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
+  document.querySelector("#sign_button").addEventListener("click", sign);
 });
 

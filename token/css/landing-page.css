@@ -22,6 +22,35 @@ h6 {
   display: none;
 }
 
+#sign_button {
+  display: none;
+  width: 200px;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: #00a66c;
+}
+
+#sign_button:focus {
+  outline:0;
+}
+
+#sign_button:active {
+  outline:0;
+  background-color: #009964;
+  -webkit-box-shadow: 0px 0px 17px 1px #00a66c; 
+  box-shadow: 0px 0px 17px 1px #00a66c;
+}
+
+#sign_button:hover {
+  outline:0;
+  -webkit-box-shadow: 0px 0px 20px 1px #00a66c; 
+  box-shadow: 0px 0px 20px 1px #00a66c;
+}
+
 .disconnect_wallet {
   display: none;
   border-width: 0;
@@ -39,14 +68,14 @@ h6 {
 .disconnect_wallet:active {
   outline:0;
   background-color: rgb(230,230,230);
-  -webkit-box-shadow: 0px 0px 17px 1px #C9C9C9; 
-  box-shadow: 0px 0px 17px 1px #C9C9C9;
+  -webkit-box-shadow: 0px 0px 17px 1px rgb(210,210,210);
+  box-shadow: 0px 0px 17px 1px rgb(210,210,210);
 }
 
 .disconnect_wallet:hover {
   outline:0;
-  -webkit-box-shadow: 0px 0px 20px 1px #C9C9C9; 
-  box-shadow: 0px 0px 20px 1px #C9C9C9;
+  -webkit-box-shadow: 0px 0px 20px 1px rgb(210,210,210);
+  box-shadow: 0px 0px 20px 1px rgb(210,210,210);
 }
 
 .connect_wallet {
@@ -65,14 +94,14 @@ h6 {
 .connect_wallet:active {
   outline:0;
   background-color: rgb(230,230,230);
-  -webkit-box-shadow: 0px 0px 17px 1px #C9C9C9; 
-  box-shadow: 0px 0px 17px 1px #C9C9C9;
+  -webkit-box-shadow: 0px 0px 17px 1px rgb(210,210,210);
+  box-shadow: 0px 0px 17px 1px rgb(210,210,210);
 }
 
 .connect_wallet:hover {
   outline:0;
-  -webkit-box-shadow: 0px 0px 20px 1px #C9C9C9; 
-  box-shadow: 0px 0px 20px 1px #C9C9C9;
+  -webkit-box-shadow: 0px 0px 20px 1px rgb(210,210,210);
+  box-shadow: 0px 0px 20px 1px rgb(210,210,210);
 }
 
 
