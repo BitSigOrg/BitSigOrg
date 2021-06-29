@@ -219,26 +219,34 @@
   <div id="signUpModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <div class="row mx-auto mb-3 mt-4">
+      <div class="row mx-auto mb-3 mt-4" id="modal-email-container">
         <input type="email" id="modal-email" class="modal-text" placeholder="Email (required)"/>
       </div>
       <div class="row mx-auto mb-2">
         <input id="modal-name" class="modal-text" placeholder="Name (optional)"/>
       </div>
-      <div class="row mx-auto mb-2" id="modal-verification-info-container">
-        <p id="modal-verification-info"></p>
-      </div>
-      <div class="row mx-auto mb-3" id="modal-verification-container">
-        <input id="modal-verification" class="modal-text" placeholder="Verification Code"/>
-      </div>
       <div class="row mx-auto mt-5 mb-5" id="modal-continue-container">
         <button class="modal-button" id="modal-continue">Continue</button>
       </div>
-      <div class="row mx-auto mt-5" id="modal-sign-container">
-        <button class="modal-button" id="modal-sign">Finish Signing</button>
+    </div>
+  </div> 
+
+  <div id="askForSignModal" class="modal">
+    <div class="sign-modal-content">
+      <!-- <span class="close">&times;</span> -->
+      <div class="row mx-auto my-auto text-center mt-3 mb-4">
+        <p id="sign-modal-text">Waiting for wallet signature</p>
       </div>
-      <div class="row mx-auto mb-2" id="modal-resend-container">
-        <button id="modal-resend">Resend</button>
+    </div>
+  </div>
+
+  <div id="emailConfirmationModal" class="modal">
+    <div id="confirmation-modal-content">
+      <div class="row mx-auto mt-4 mb-3">
+        <p id="modal-email-info"></p>
+      </div>
+      <div class="row text-center my-auto mx-auto mt-3 mb-4" id="modal-close-container">
+        <button class="modal-button" id="modal-close">Close</button>
       </div>
     </div>
   </div> 

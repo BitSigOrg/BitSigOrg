@@ -31,6 +31,9 @@ let provider;
 // Address of the selected account
 let selectedAccount;
 
+let bitsigSignature;
+let name;
+
 
 /**
  * Setup the orchestra
@@ -141,21 +144,19 @@ async function fetchAccountData() {
   document.querySelector("#sign_button").style.display = "inline";
 }
 
-async function finishSigning() {
-  const web3 = new Web3(provider);
-  const accounts = await web3.eth.getAccounts();
-  var message = "Some string"
-  var hash = web3.utils.sha3(message)
-  var signature = await web3.eth.personal.sign(hash, accounts[0])
-  alert(signature);
+function closeSigning() {
+  var modal = document.getElementById("emailConfirmationModal");
+  modal.style.display = "none";
 }
 
 function sendVerificationCode() {
   let email = document.getElementById("modal-email").value;
+  let name = document.getElementById("modal-name").value;
   var actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: 'bitsig.org/tokenSigned'
+    url: 'https://bitsig.org/tokenSigned?signature=' + bitsigSignature + '&name=' + name,
+    handleCodeInApp: true
   };
   firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
   .then(() => {
@@ -164,25 +165,35 @@ function sendVerificationCode() {
     // if they open the link on the same device.
     window.localStorage.setItem('emailForSignIn', email);
     
-    document.querySelector("#modal-email").style.display = "none";
-    document.querySelector("#modal-name").style.display = "none";
-    document.querySelector("#modal-continue-container").style.display = "none";
+    document.querySelector("#signUpModal").style.display = "none";
+    document.querySelector("#emailConfirmationModal").style.display = "inline";
+    document.querySelector("#modal-email-info").innerHTML = "To confirm your signature, follow the link sent to: " + document.getElementById("modal-email").value;
 
-    document.querySelector("#modal-verification-container").style.display = "inline";
-    document.querySelector("#modal-verification-info").innerHTML = "Enter the verification code sent<br/>to " + document.getElementById("modal-email").value;
-    document.querySelector("#modal-verification-info-container").style.display = "inline";
-    document.querySelector("#modal-resend-container").style.display = "inline";
-    document.querySelector("#modal-sign-container").style.display = "inline";
   })
   .catch((error) => {
     var errorCode = error.code;
     var errorMessage = error.message;
-    // ...
+    console.log(errorCode);
+    console.log(errorMessage)
   });
 }
 
-// can ask if they want to be on the token too
-function sign() {
+// can ask if they want to be in the token too later
+async function sign() {
+  const web3 = new Web3(provider);
+  const accounts = await web3.eth.getAccounts();
+  var message = "Some string"
+  var hash = web3.utils.sha3(message)
+
+  var sign_modal = document.getElementById("askForSignModal");
+  sign_modal.style.display = "block";
+
+  var signature = await web3.eth.personal.sign(hash, accounts[0]);
+  window.localStorage.setItem('bitsigSignature', signature);
+  bitsigSignature = signature;
+
+
+  sign_modal.style.display = "none";
   var modal = document.getElementById("signUpModal");
   modal.style.display = "block";
 }
@@ -290,22 +301,22 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#sign_button").addEventListener("click", sign);
   document.querySelector("#modal-continue").addEventListener("click", sendVerificationCode);
-  document.querySelector("#modal-resend").addEventListener("click", resendCode);
-  document.querySelector("#modal-sign").addEventListener("click", finishSigning);
+  document.querySelector("#modal-close").addEventListener("click", closeSigning);
 
   var modal = document.getElementById("signUpModal");
-  var btn = document.getElementById("myBtn");
-  var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
+    }
+  }
+
+  var confirmation_modal = document.getElementById("emailConfirmationModal");
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      confirmation_modal.style.display = "none";
     }
   }
 });
