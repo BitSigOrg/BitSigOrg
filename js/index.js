@@ -153,9 +153,20 @@ function sendVerificationCode() {
   let email = document.getElementById("modal-email").value;
   let name = document.getElementById("modal-name").value;
   var actionCodeSettings = {
-    // URL you want to redirect back to. The domain (www.example.com) for this
-    // URL must be in the authorized domains list in the Firebase Console.
-    url: 'https://bitsig.org/tokenSigned?signature=' + bitsigSignature + '&name=' + name,
+
+
+    // ------------- TODO -------------
+
+    // This page will:
+    // Log the user in.
+    // Create a bitsig user for them and add the name to it
+    // Add their signature to the token
+    // Will have option to connect their twitter
+
+    // MAKE THE DATABASE RULES SOLID SINCE API KEY IS PUBLIC
+    // Change the QR code to be bitsig.com/token?token_id=1 and just redirect to bitsig.com
+    // Have the code be just for signing the token, not entering the app necessarily
+    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&name=' + name + "&email=" + email,
     handleCodeInApp: true
   };
   firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)

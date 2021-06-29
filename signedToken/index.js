@@ -94,35 +94,6 @@ async function fetchAccountData() {
   console.log("Got accounts", accounts);
   selectedAccount = accounts[0];
 
-  // document.querySelector("#selected-account").textContent = selectedAccount;
-
-  // Get a handle
-  // const template = document.querySelector("#template-balance");
-  // const accountContainer = document.querySelector("#accounts");
-
-  // Purge UI elements any previously loaded accounts
-  // accountContainer.innerHTML = '';
-
-  // // Go through all accounts and get their ETH balance
-  // const rowResolvers = accounts.map(async (address) => {
-  //   const balance = await web3.eth.getBalance(address);
-  //   // ethBalance is a BigNumber instance
-  //   // https://github.com/indutny/bn.js/
-  //   const ethBalance = web3.utils.fromWei(balance, "ether");
-  //   const humanFriendlyBalance = parseFloat(ethBalance).toFixed(4);
-  //   console.log(humanFriendlyBalance);
-  //   // Fill in the templated row and put in the document
-  //   // const clone = template.content.cloneNode(true);
-  //   // clone.querySelector(".address").textContent = address;
-  //   // clone.querySelector(".balance").textContent = humanFriendlyBalance;
-  //   // accountContainer.appendChild(clone);
-  // });
-
-  // Because rendering account does its own RPC commucation
-  // with Ethereum node, we do not want to display any results
-  // until data for all accounts is loaded
-  // await Promise.all(rowResolvers);
-
   // Display fully loaded UI for wallet data
   document.querySelector("#btn-connect").style.display = "none";
   document.querySelector("#btn-disconnect").style.display = "inline";
@@ -254,13 +225,40 @@ async function onDisconnect() {
  * Main entry point.
  */
 window.addEventListener('load', async () => {
+  // Confirm the link is a sign-in with email link.
+  let params = (new URL(document.location)).searchParams;
+  let name = params.get('name');
+  let signature = params.get('signature')
+
+  if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+    var email = window.localStorage.getItem('emailForSignIn');
+    if (!email) {
+      // later on, have them re-enter email to stop session injection
+      email = params.get('email');
+    }
+    // The client SDK will parse the code from the link for you.
+    firebase.auth().signInWithEmailLink(email, window.location.href)
+      .then((result) => {
+        // Clear email from storage.
+        window.localStorage.removeItem('emailForSignIn');
+        let user = result.user;
+        console.log("got user")
+        console.log(user);
+        console.log(name);
+        console.log(signature);
+      })
+      .catch((error) => {
+      
+      });
+  }
+
   init();
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
-  document.querySelector("#sign_button").addEventListener("click", sign);
-  document.querySelector("#modal-continue").addEventListener("click", verificationCode);
-  document.querySelector("#modal-resend").addEventListener("click", resendCode);
-  document.querySelector("#modal-sign").addEventListener("click", finishSigning);
+  // document.querySelector("#sign_button").addEventListener("click", sign);
+  // document.querySelector("#modal-continue").addEventListener("click", verificationCode);
+  // document.querySelector("#modal-resend").addEventListener("click", resendCode);
+  // document.querySelector("#modal-sign").addEventListener("click", finishSigning);
 
   var modal = document.getElementById("signUpModal");
   var btn = document.getElementById("myBtn");
