@@ -31,8 +31,9 @@ let provider;
 // Address of the selected account
 let selectedAccount;
 
-let bitsigSignature;
-let name;
+var bitsigSignature;
+var name;
+var ethaddress;
 
 
 /**
@@ -107,6 +108,7 @@ async function fetchAccountData() {
   // MetaMask does not give you all accounts, only the selected account
   console.log("Got accounts", accounts);
   selectedAccount = accounts[0];
+  ethaddress = selectedAccount;
 
   // document.querySelector("#selected-account").textContent = selectedAccount;
 
@@ -166,7 +168,7 @@ function sendVerificationCode() {
     // MAKE THE DATABASE RULES SOLID SINCE API KEY IS PUBLIC
     // Change the QR code to be bitsig.com/token?token_id=1 and just redirect to bitsig.com
     // Have the code be just for signing the token, not entering the app necessarily
-    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&name=' + name + "&email=" + email,
+    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&ethaddress=' + ethaddress + '&name=' + name + "&email=" + email,
     handleCodeInApp: true
   };
   firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
@@ -208,11 +210,6 @@ async function sign() {
   var modal = document.getElementById("signUpModal");
   modal.style.display = "block";
 }
-
-function resendCode() {
-
-}
-
 
 /**
  * Fetch account data for UI when

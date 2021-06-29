@@ -13,7 +13,6 @@
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
 
  // Unpkg imports
 const Web3Modal = window.Web3Modal.default;
@@ -112,67 +111,24 @@ async function fetchAccountData() {
   document.querySelector("#sign_button").style.display = "inline";
 }
 
-async function finishSigning() {
-  const web3 = new Web3(provider);
-  const accounts = await web3.eth.getAccounts();
-  var message = "Some string"
-  var hash = web3.utils.sha3(message)
-  var signature = await web3.eth.personal.sign(hash, accounts[0])
-  alert(signature);
-}
-
-function verificationCode() {
-  document.querySelector("#modal-email").style.display = "none";
-  document.querySelector("#modal-name").style.display = "none";
-  document.querySelector("#modal-continue-container").style.display = "none";
-
-  document.querySelector("#modal-verification-container").style.display = "inline";
-  document.querySelector("#modal-verification-info").innerHTML = "Enter the verification code sent<br/>to " + document.getElementById("modal-email").value;
-  document.querySelector("#modal-verification-info-container").style.display = "inline";
-  document.querySelector("#modal-resend-container").style.display = "inline";
-  document.querySelector("#modal-sign-container").style.display = "inline";
-}
-
 // can ask if they want to be on the token too
 function sign() {
   var modal = document.getElementById("signUpModal");
   modal.style.display = "block";
 }
 
-function resendCode() {
 
-}
-
-
-/**
- * Fetch account data for UI when
- * - User switches accounts in wallet
- * - User switches networks in wallet
- * - User connects wallet initially
- */
 async function refreshAccountData() {
-
-  // If any current data is displayed when
-  // the user is switching acounts in the wallet
-  // immediate hide this data
   document.querySelector("#btn-disconnect").style.display = "none";
   document.querySelector("#btn-connect").style.display = "inline";
   document.querySelector("#blockchain_status").style.display = "none";
   document.querySelector("#sign_button").style.display = "none";
 
-  // Disable button while UI is loading.
-  // fetchAccountData() will take a while as it communicates
-  // with Ethereum node via JSON-RPC and loads chain data
-  // over an API call.
   document.querySelector("#btn-connect").setAttribute("disabled", "disabled")
   await fetchAccountData(provider);
   document.querySelector("#btn-connect").removeAttribute("disabled")
 }
 
-
-/**
- * Connect wallet button pressed.
- */
 async function onConnect() {
 
   console.log("Opening a dialog", web3Modal);
@@ -183,29 +139,11 @@ async function onConnect() {
     return;
   }
 
-  // // Subscribe to accounts change
-  // provider.on("accountsChanged", (accounts) => {
-  //   fetchAccountData();
-  // });
-
-  // // Subscribe to chainId change
-  // provider.on("chainChanged", (chainId) => {
-  //   fetchAccountData();
-  // });
-
-  // // Subscribe to networkId change
-  // provider.on("networkChanged", (networkId) => {
-  //   fetchAccountData();
-  // });
-
   fetchAccountData();
 
   await refreshAccountData();
 }
 
-/**
- * Disconnect wallet button pressed.
- */
 async function onDisconnect() {
 
   console.log("Killing the wallet connection", provider);
@@ -232,13 +170,11 @@ async function onDisconnect() {
 }
 
 
-/**
- * Main entry point.
- */
 window.addEventListener('load', async () => {
   // Confirm the link is a sign-in with email link.
   let params = (new URL(document.location)).searchParams;
   let name = params.get('name');
+  let ethaddress = params.get('ethaddress');
   let signature = params.get('signature')
   console.log(name);
   console.log(signature);
@@ -252,11 +188,33 @@ window.addEventListener('load', async () => {
     // The client SDK will parse the code from the link for you.
     firebase.auth().signInWithEmailLink(email, window.location.href)
       .then((result) => {
-        // Clear email from storage.
-        window.localStorage.removeItem('emailForSignIn');
-        let user = result.user;
-        console.log("got user")
-        console.log(user);
+      // Clear email from storage.
+      window.localStorage.removeItem('emailForSignIn');
+      let user = result.user;
+      firebase.database().ref('users').child(user.uid).set({
+          email: email,
+          eth_address: ethaddress,
+          name: name,
+          twitter_username: ""
+        }, (error) => {
+          if (error) {
+            console.log("failed to create user in database")
+          } else {
+            firebase.database().ref('tokens').child("1").child("signer_users").child(user.uid).set({
+              ethereum_address: ethaddress,
+              message: "msg",
+              name: name,
+              signature: signature,
+              num_signer: 1
+            }, (error) => {
+              if (error) {
+                console.log("error")
+              } else {
+                console.log("successfully signed")
+              }
+            });
+          }
+        });
       })
       .catch((error) => {
       
