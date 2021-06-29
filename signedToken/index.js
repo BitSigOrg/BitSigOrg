@@ -1,9 +1,5 @@
 "use strict";
 
-/**
- * Example JavaScript code that interacts with the page and Web3 wallets
- */
-
  var firebaseConfig = {
     apiKey: "AIzaSyB7aosAnOr4k0lgPPlR11vAA267hhEqh64",
     authDomain: "bitsig-21bf7.firebaseapp.com",
@@ -244,6 +240,8 @@ window.addEventListener('load', async () => {
   let params = (new URL(document.location)).searchParams;
   let name = params.get('name');
   let signature = params.get('signature')
+  console.log(name);
+  console.log(signature);
 
   if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
     var email = window.localStorage.getItem('emailForSignIn');
@@ -259,8 +257,6 @@ window.addEventListener('load', async () => {
         let user = result.user;
         console.log("got user")
         console.log(user);
-        console.log(name);
-        console.log(signature);
       })
       .catch((error) => {
       
