@@ -191,58 +191,64 @@ window.addEventListener('load', async () => {
       // Clear email from storage.
       window.localStorage.removeItem('emailForSignIn');
       let user = result.user;
-      firebase.database().ref('users').child(user.uid).set({
-          email: email,
-          eth_address: ethaddress,
-          name: name,
-          twitter_username: ""
-        }, (error) => {
-          if (error) {
-            console.log("failed to create user in database")
-          } else {
-            firebase.database().ref('tokens').child("1").child("signer_users").child(user.uid).set({
-              ethereum_address: ethaddress,
-              message: "contractAddress:abcd_tokenId:1",
-              name: name,
-              signature: signature,
-              num_signer: 1
-            }, (error) => {
-              if (error) {
-                console.log("error")
-              } else {
-                console.log("successfully signed")
-              }
-            });
-          }
-        });
-      })
-      .catch((error) => {
-      
+      firebase.database().ref("users").child(user.uid).get().then((snapshot) => {
+        if (!snapshot.exists()) {
+          firebase.database().ref('users').child(user.uid).set({
+            email: email,
+            eth_address: ethaddress,
+            name: name,
+            twitter_username: ""
+          }, (error) => {
+            if (error) {
+              console.log("failed to create user in database")
+            } else {
+              firebase.database().ref('tokens').child("1").child("signer_users").child(user.uid).set({
+                ethereum_address: ethaddress,
+                message: "contractAddress:abcd_tokenId:1",
+                name: name,
+                signature: signature,
+                num_signer: 1
+              }, (error) => {
+                if (error) {
+                  console.log("error")
+                } else {
+                  console.log("successfully signed")
+                }
+              });
+            }
+          });
+        }
+      }).catch((error) => {
+        console.error(error);
       });
+    })
+    .catch((error) => {
+    
+    });
   }
 
-  init();
-  document.querySelector("#btn-connect").addEventListener("click", onConnect);
-  document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
+  // init();
+  // document.querySelector("#btn-connect").addEventListener("click", onConnect);
+  // document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   // document.querySelector("#sign_button").addEventListener("click", sign);
   // document.querySelector("#modal-continue").addEventListener("click", verificationCode);
   // document.querySelector("#modal-resend").addEventListener("click", resendCode);
   // document.querySelector("#modal-sign").addEventListener("click", finishSigning);
 
-  var modal = document.getElementById("signUpModal");
-  var btn = document.getElementById("myBtn");
-  var span = document.getElementsByClassName("close")[0];
+  // var modal = document.getElementById("signUpModal");
+  // var btn = document.getElementById("myBtn");
+  // var span = document.getElementsByClassName("close")[0];
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
+  // // When the user clicks on <span> (x), close the modal
+  // span.onclick = function() {
+  //   modal.style.display = "none";
+  // }
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+  // // When the user clicks anywhere outside of the modal, close it
+  // window.onclick = function(event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
 });
 
