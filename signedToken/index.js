@@ -231,7 +231,7 @@ function addTextToImageNameExtended(imagePath, sigNum, name, name_extended) {
 
 window.addEventListener('load', async () => {
   let params = (new URL(document.location)).searchParams;
-  var name = params.get('name').replace(/%20/g," ");
+  var name = params.get('name');
   if (name != "") {
     name = name.replace(/%20/g," ");
   }
