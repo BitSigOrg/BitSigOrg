@@ -269,7 +269,14 @@ window.addEventListener('load', async () => {
           console.log(num)
           let name = snapshot.val().name;
           console.log(name)
-          if (name == "") {
+
+          var nameExtended = ""
+          if (name.length > 23) {
+            nameExtended = name.substring(23)
+            name = name.substring(0,23);
+          }
+
+          if (nameExtended == "") {
             addTextToImage('img/ticket_10.jpg', "Signature #" + num.toString())
           }
           else if (nameExtended == "") {
