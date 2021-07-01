@@ -164,11 +164,6 @@ function finishSigning() {
     firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("name").set(new_name);
     firebase.database().ref("users").child(firebaseUsername).child("name").set(new_name);
   }
-
-  if (twitterUsername !== "" && firebaseUsername !== "") {
-    firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("name").set(new_name);
-    firebase.database().ref("users").child(firebaseUsername).child("twitter_username").set(twitterUsername);
-  }
   document.querySelector("#addNameTwitterModal").style.display = "none";
   window.location.replace('https://bitsig.org/signedToken');
 }
@@ -177,17 +172,15 @@ function connectToTwitter() {
   var provider = new firebase.auth.TwitterAuthProvider();
   firebase.auth().currentUser.linkWithPopup(provider).then((result) => {
     let twitter_info = result.additionalUserInfo;
-    console.log("twitter info")
-    console.log(twitter_info);
     if (twitter_info !== null) {
       let profile = twitter_info.profile;
-      console.log("profile")
-      console.log(profile);
       if (profile !== null) {
         let username = profile["screen_name"]
-        console.log("username")
-        console.log(username);
         twitterUsername = username;
+        if (username !== null && username !== "" && firebaseUsername !== "") {
+          firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("twitter_username").set(username);
+          firebase.database().ref("users").child(firebaseUsername).child("twitter_username").set(username);
+        }
       }
     }
   }).catch((error) => {
