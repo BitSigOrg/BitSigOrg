@@ -169,6 +169,19 @@ async function onDisconnect() {
   document.querySelector("#sign_button").style.display = "none";
 }
 
+function setLoading() {
+    var canvas = document.getElementById("qr");
+    canvas.width = 2048;
+    canvas.height = 2408;
+    var context = canvas.getContext("2d");
+
+    var img = new Image();
+    img.src = "img/ticket_loading.jpg";
+    img.onload = function () {
+        context.drawImage(img, 0, 0, img.width, img.height,0, 0, canvas.width, canvas.height);
+    };
+}
+
 function addTextToImage(imagePath, sigNum) {
     var canvas = document.getElementById("qr");
     canvas.width = 2048;
@@ -271,6 +284,8 @@ window.addEventListener('load', async () => {
     name = "";
   }
   
+  setLoading();
+
   let ethaddress = params.get('ethaddress');
   let signature = params.get('signature');
   let message = params.get('message');
