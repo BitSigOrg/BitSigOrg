@@ -274,6 +274,12 @@ function loadPicture(uid) {
   })
 }
 
+function saveImage() {
+  var canvas = document.getElementById("qr");
+  var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
+  window.location.href=image;
+}
+
 window.addEventListener('load', async () => {
   let params = (new URL(document.location)).searchParams;
   var name = params.get('name');
@@ -344,6 +350,8 @@ window.addEventListener('load', async () => {
       window.location.replace('https://bitsig.org/');
     });
   }
+
+  document.querySelector("#save_button").addEventListener("click", saveImage);
 
   // init();
   // document.querySelector("#btn-connect").addEventListener("click", onConnect);

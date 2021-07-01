@@ -148,8 +148,7 @@ h6 {
   display: none;
 }
 
-#sign_button {
-  display: none;
+#save_button {
   width: 200px;
   border-width: 0;
   border-radius: 10px;
@@ -160,18 +159,18 @@ h6 {
   background-color: #00a66c;
 }
 
-#sign_button:focus {
+#save_button:focus {
   outline:0;
 }
 
-#sign_button:active {
+#save_button:active {
   outline:0;
   background-color: #009964;
   -webkit-box-shadow: 0px 0px 17px 1px #00a66c; 
   box-shadow: 0px 0px 17px 1px #00a66c;
 }
 
-#sign_button:hover {
+#save_button:hover {
   outline:0;
   -webkit-box-shadow: 0px 0px 20px 1px #00a66c; 
   box-shadow: 0px 0px 20px 1px #00a66c;
