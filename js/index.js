@@ -35,7 +35,7 @@ var bitsigSignature;
 var name;
 var ethaddress;
 var signedMessage;
-var uid;
+var firebaseUsername = "";
 var twitterUsername = "";
 
 
@@ -160,14 +160,14 @@ function finishSigning() {
   if (new_name == null) {
     new_name = "";
   }
-  if (new_name !== "" && new_name !== name ){
-    firebase.database().ref('tokens').child("1").child("signer_users").child(uid).child("name").set(new_name);
-    firebase.database().ref('users').child(uid).child("name").set(new_name);
+  if (new_name !== "" && new_name !== name && firebaseUsername !== ""){
+    firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("name").set(new_name);
+    firebase.database().ref("users").child(firebaseUsername).child("name").set(new_name);
   }
 
-  if (twitterUsername !== "" ) {
-    firebase.database().ref('tokens').child("1").child("signer_users").child(uid).child("name").set(new_name);
-    firebase.database().ref('users').child(uid).child("twitter_username").set(twitterUsername);
+  if (twitterUsername !== "" && firebaseUsername !== "") {
+    firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("name").set(new_name);
+    firebase.database().ref("users").child(firebaseUsername).child("twitter_username").set(twitterUsername);
   }
   document.querySelector("#addNameTwitterModal").style.display = "none";
   window.location.replace('https://bitsig.org/signedToken');
@@ -198,7 +198,6 @@ function connectToTwitter() {
 
 function connectSignature(uid) {
   alert("connecting signature")
-  uid = uid;
   firebase.database().ref("users").child(uid).get().then((snapshot) => {
     if (!snapshot.exists()) {
       firebase.database().ref('users').child(uid).set({
@@ -245,6 +244,7 @@ function signIn() {
   if (password == password2) {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
       var user = userCredential.user;
+      firebaseUsername = user.uid;
       connectSignature(user.uid);
     })
     .catch((error) => {
@@ -287,6 +287,8 @@ function googleSignin() {
     var credential = result.credential;
     var token = credential.accessToken;
     var user = result.user;
+    firebaseUsername = user.uid;
+
     connectSignature(user.uid);
   }).catch((error) => {
     // Handle Errors here.
