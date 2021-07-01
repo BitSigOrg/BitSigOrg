@@ -275,9 +275,14 @@ function loadPicture(uid) {
 }
 
 function saveImage() {
-  var canvas = document.getElementById("qr");
-  var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
-  window.location.href=image;
+  // var canvas = document.getElementById("qr");
+  // var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
+  // window.location.href=image;
+
+  var link = document.createElement('a');
+  link.download = 'bitsig_receipt.png';
+  link.href = document.getElementById('qr').toDataURL()
+  link.click();
 }
 
 window.addEventListener('load', async () => {
