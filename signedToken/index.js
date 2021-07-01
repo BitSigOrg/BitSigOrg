@@ -292,7 +292,8 @@ window.addEventListener('load', async () => {
     if (user) {
       alert("signed in")
       var uid = user.uid;
-      firebase.database().ref("token").child("1").child("signer_users").child(uid).get().then((snapshot) => {
+      alert(uid)
+      firebase.database().ref("tokens").child("1").child("signer_users").child(uid).get().then((snapshot) => {
         console.log("1")
         if (snapshot.exists()) {
           console.log("2")
