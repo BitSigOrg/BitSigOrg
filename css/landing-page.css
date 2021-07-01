@@ -245,6 +245,10 @@ h6 {
 }
 /* ------ */
 
+#google-button {
+  background-image: "img/google_signin.png";
+}
+
 #blockchain_status {
   display: none;
 }

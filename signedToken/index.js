@@ -286,75 +286,30 @@ function saveImage() {
 }
 
 window.addEventListener('load', async () => {
-  let params = (new URL(document.location)).searchParams;
-  var name = params.get('name');
-  if (name != "" && name != null) {
-    name = name.replace(/%20/g," ");
-  }
-  else {
-    name = "";
-  }
-  
   setLoading();
 
-  let ethaddress = params.get('ethaddress');
-  let signature = params.get('signature');
-  let message = params.get('message');
-  console.log(name);
-  console.log(signature);
-  console.log(message)
-
-  if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-    var email = window.localStorage.getItem('emailForSignIn');
-    if (!email) {
-      // later on, have them re-enter email to stop session injection
-      email = params.get('email');
-    }
-    // The client SDK will parse the code from the link for you.
-    firebase.auth().signInWithEmailLink(email, window.location.href)
-      .then((result) => {
-      // Clear email from storage.
-      window.localStorage.removeItem('emailForSignIn');
-      let user = result.user;
-      firebase.database().ref("users").child(user.uid).get().then((snapshot) => {
-        if (!snapshot.exists()) {
-          firebase.database().ref('users').child(user.uid).set({
-            email: email,
-            eth_address: ethaddress,
-            name: name,
-            twitter_username: ""
-          }, (error) => {
-            if (error) {
-              console.log("failed to create user in database")
-            } else {
-              firebase.database().ref('tokens').child("1").child("signer_users").child(user.uid).set({
-                ethereum_address: ethaddress,
-                message: message,
-                name: name,
-                signature: signature,
-                num_signer: 1
-              }, (error) => {
-                if (error) {
-                  console.log("error")
-                } else {
-                  console.log("successfully signed")
-                  loadPicture(user.uid)
-                }
-              });
-            }
-          });
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      var uid = user.uid;
+      firebase.database().ref("token").child("1").child("signer_users").child(uid).get().then((snapshot) => {
+        if (snapshot.exists()) {
+          let num = snapshot.val().num_signer;
+          let name = snapshot.val().name;
+          if (name == "") {
+            addTextToImage('img/ticket_10.jpg', "Signature #" + num.toString())
+          }
+          else if (nameExtended == "") {
+            addTextToImageName('img/ticket_10_name.jpg', "Signature #" + num.toString(), "Signer: " + name)
+          }
+          else {
+            addTextToImageNameExtended('img/ticket_10_name_extended.jpg', "Signature #" + num.toString(), "Signer: " + name, nameExtended)
+          }
         }
-        else {
-          loadPicture(user.uid)   
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
-    })
-    .catch((error) => {
+      })
+    } else {
       window.location.replace('https://bitsig.org/');
-    });
-  }
+    }
+  });
 
   document.querySelector("#save_button").addEventListener("click", saveImage);
 

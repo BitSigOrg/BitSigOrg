@@ -152,45 +152,65 @@ function closeSigning() {
   modal.style.display = "none";
 }
 
-function sendVerificationCode() {
+function connectSignature(uid) {
   let email = document.getElementById("modal-email").value;
-  var name = document.getElementById("modal-name").value;
-  if(name !== "") {
-    name = name.replace(/ /g,"%20");
-  }
-  var actionCodeSettings = {
-
-
-    // ------------- TODO -------------
-
-    // This page will:
-    // Log the user in.
-    // Create a bitsig user for them and add the name to it
-    // Add their signature to the token
-    // Will have option to connect their twitter
-
-    // Change the QR code to be bitsig.com/token?token_id=1 and just redirect to bitsig.com
-    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&message=' + signedMessage + '&ethaddress=' + ethaddress + '&name=' + name + "&email=" + email,
-    handleCodeInApp: true
-  };
-  firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-  .then(() => {
-    // The link was successfully sent. Inform the user.
-    // Save the email locally so you don't need to ask the user for it again
-    // if they open the link on the same device.
-    window.localStorage.setItem('emailForSignIn', email);
-    
-    document.querySelector("#signUpModal").style.display = "none";
-    document.querySelector("#emailConfirmationModal").style.display = "inline";
-    document.querySelector("#modal-email-info").innerHTML = "To confirm your signature, follow the link sent to: " + document.getElementById("modal-email").value;
-
-  })
-  .catch((error) => {
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage)
+  firebase.database().ref("users").child(uid).get().then((snapshot) => {
+    if (!snapshot.exists()) {
+      firebase.database().ref('users').child(uid).set({
+        email: email,
+        eth_address: ethaddress,
+        name: name,
+        twitter_username: ""
+      }, (error) => {
+        if (error) {
+          console.log("failed to create user in database")
+        } else {
+          firebase.database().ref('tokens').child("1").child("signer_users").child(uid).set({
+            ethereum_address: ethaddress,
+            message: signedMessage,
+            name: name,
+            signature: bitsigSignature,
+            num_signer: 1
+          }, (error) => {
+            if (error) {
+              console.log("error")
+            } else {
+              console.log("successfully signed");
+              document.querySelector("#signUpModal").style.display = "none";
+              window.location.replace('https://bitsig.org/signedToken');
+            }
+          });
+        }
+      });
+    }
+  }).catch((error) => {
+    console.error(error);
   });
+}
+
+function signIn() {
+  let email = document.getElementById("modal-email").value;
+  let password = document.getElementById("password-1").value;
+  let password2 = document.getElementById("password-2").value;
+  var name = document.getElementById("modal-name").value;
+  if (name == null) {
+    name = "";
+  }
+
+  if (password == password2) {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+      var user = userCredential.user;
+      connectSignature(user.uid);
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ..
+    });
+  }
+  else {
+    alert("Passwords don't match.")
+  }
 }
 
 // can ask if they want to be in the token too later
@@ -213,6 +233,29 @@ async function sign() {
   sign_modal.style.display = "none";
   var modal = document.getElementById("signUpModal");
   modal.style.display = "block";
+}
+
+function googleSignin() {
+  alert("test");
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
+    var token = credential.accessToken;
+    var user = result.user;
+    alert(user)
+    connectSignature(user.uid);
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage)
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
 }
 
 /**
@@ -312,9 +355,9 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-connect").addEventListener("click", onConnect);
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#sign_button").addEventListener("click", sign);
-  document.querySelector("#modal-continue").addEventListener("click", sendVerificationCode);
+  document.querySelector("#modal-continue").addEventListener("click", signIn);
   document.querySelector("#modal-close").addEventListener("click", closeSigning);
-
+  document.querySelector("#google-button").addEventListener("click", googleSignin);
   var modal = document.getElementById("signUpModal");
 
   // When the user clicks anywhere outside of the modal, close it
