@@ -229,7 +229,7 @@ function addTextToImageNameExtended(imagePath, sigNum, name, name_extended) {
     };
 }
 
-function loadPicture() {
+function loadPicture(uid) {
   let params = (new URL(document.location)).searchParams;
   var name = params.get('name');
   if (name != "" && name != null) {
@@ -245,7 +245,7 @@ function loadPicture() {
     name = name.substring(0,23);
   }
 
-  firebase.database().ref("users").child(user.uid).child("tokens_signed").child("1").get().then((snapshot) => {
+  firebase.database().ref("users").child(uid).child("tokens_signed").child("1").get().then((snapshot) => {
     if (snapshot.exists()) {
       let num = snapshot.val()
       if (name == "") {
@@ -312,21 +312,21 @@ window.addEventListener('load', async () => {
                   console.log("error")
                 } else {
                   console.log("successfully signed")
-                  loadPicture()
+                  loadPicture(user.uid)
                 }
               });
             }
           });
         }
         else {
-          loadPicture()   
+          loadPicture(user.uid)   
         }
       }).catch((error) => {
         console.error(error);
       });
     })
     .catch((error) => {
-    
+      window.location.replace('https://bitsig.org/');
     });
   }
 

@@ -169,8 +169,6 @@ function sendVerificationCode() {
     // Add their signature to the token
     // Will have option to connect their twitter
 
-    // should add a timestamp to the signature
-
     // Change the QR code to be bitsig.com/token?token_id=1 and just redirect to bitsig.com
     url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&message=' + signedMessage + '&ethaddress=' + ethaddress + '&name=' + name + "&email=" + email,
     handleCodeInApp: true
