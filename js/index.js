@@ -169,7 +169,7 @@ function finishSigning() {
 
 function connectToTwitter() {
   var provider = new firebase.auth.TwitterAuthProvider();
-  auth.currentUser.linkWithPopup(provider).then((result) => {
+  firebase.auth().currentUser.linkWithPopup(provider).then((result) => {
     let twitter_info = result.additionalUserInfo;
     console.log("twitter info")
     console.log(twitter_info);
