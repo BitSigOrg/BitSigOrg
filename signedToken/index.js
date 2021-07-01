@@ -290,17 +290,17 @@ window.addEventListener('load', async () => {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      alert("signed in")
+      console.log("signed in");
       var uid = user.uid;
-      alert(uid)
+      console.log(uid);
       firebase.database().ref("tokens").child("1").child("signer_users").child(uid).get().then((snapshot) => {
         console.log("1")
         if (snapshot.exists()) {
           console.log("2")
           let num = snapshot.val().num_signer;
-          alert(num)
+          console.log(num)
           let name = snapshot.val().name;
-          alert(name)
+          console.log(name)
           if (name == "") {
             addTextToImage('img/ticket_10.jpg', "Signature #" + num.toString())
           }
@@ -313,7 +313,7 @@ window.addEventListener('load', async () => {
         }
       })
     } else {
-      alert("not signed in")
+      console.log("not signed in")
       // window.location.replace('https://bitsig.org/');
     }
   });

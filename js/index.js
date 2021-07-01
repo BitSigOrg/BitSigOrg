@@ -152,7 +152,22 @@ function closeSigning() {
   modal.style.display = "none";
 }
 
+// connects name and twitter too
+function finishSigning() {
+  var new_name = document.getElementById("modal-name-2").value;
+  if (new_name == null) {
+    new_name = "";
+    firebase.database().ref('tokens').child("1").child("signer_users").child(uid).child("name").set(new_name);
+  }
+  if (new_name !== name ){
+
+  }
+  document.querySelector("#addNameTwitterModal").style.display = "none";
+  window.location.replace('https://bitsig.org/signedToken');
+}
+
 function connectSignature(uid) {
+  alert("connecting signature")
   firebase.database().ref("users").child(uid).get().then((snapshot) => {
     if (!snapshot.exists()) {
       firebase.database().ref('users').child(uid).set({
@@ -175,7 +190,8 @@ function connectSignature(uid) {
             } else {
               console.log("successfully signed");
               document.querySelector("#signUpModal").style.display = "none";
-              window.location.replace('https://bitsig.org/signedToken');
+              document.querySelector("#addNameTwitterModal").style.display = "block";
+              document.querySelector("#modal-name-2").value = name;
             }
           });
         }
@@ -190,7 +206,7 @@ function signIn() {
   let email = document.getElementById("modal-email").value;
   let password = document.getElementById("password-1").value;
   let password2 = document.getElementById("password-2").value;
-  var name = document.getElementById("modal-name").value;
+  name = document.getElementById("modal-name").value;
   if (name == null) {
     name = "";
   }
@@ -234,14 +250,12 @@ async function sign() {
 }
 
 function googleSignin() {
-  alert("test");
   var provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider).then((result) => {
     /** @type {firebase.auth.OAuthCredential} */
     var credential = result.credential;
     var token = credential.accessToken;
     var user = result.user;
-    alert(user)
     connectSignature(user.uid);
   }).catch((error) => {
     // Handle Errors here.
@@ -354,22 +368,15 @@ window.addEventListener('load', async () => {
   document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
   document.querySelector("#sign_button").addEventListener("click", sign);
   document.querySelector("#modal-continue").addEventListener("click", signIn);
-  document.querySelector("#modal-close").addEventListener("click", closeSigning);
   document.querySelector("#google-button").addEventListener("click", googleSignin);
+  document.querySelector("#finish-signing").addEventListener("click", finishSigning);
+
   var modal = document.getElementById("signUpModal");
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
-    }
-  }
-
-  var confirmation_modal = document.getElementById("emailConfirmationModal");
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      confirmation_modal.style.display = "none";
     }
   }
 });
