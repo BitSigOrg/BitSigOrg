@@ -242,38 +242,6 @@ function addTextToImageNameExtended(imagePath, sigNum, name, name_extended) {
     };
 }
 
-function loadPicture(uid) {
-  let params = (new URL(document.location)).searchParams;
-  var name = params.get('name');
-  if (name != "" && name != null) {
-    name = name.replace(/%20/g," ");
-  }
-  else {
-    name = "";
-  }
-
-  var nameExtended = ""
-  if (name.length > 23) {
-    nameExtended = name.substring(23)
-    name = name.substring(0,23);
-  }
-
-  firebase.database().ref("users").child(uid).child("tokens_signed").child("1").get().then((snapshot) => {
-    if (snapshot.exists()) {
-      let num = snapshot.val()
-      if (name == "") {
-        addTextToImage('img/ticket_10.jpg', "Signature #" + num.toString())
-      }
-      else if (nameExtended == "") {
-        addTextToImageName('img/ticket_10_name.jpg', "Signature #" + num.toString(), "Signer: " + name)
-      }
-      else {
-        addTextToImageNameExtended('img/ticket_10_name_extended.jpg', "Signature #" + num.toString(), "Signer: " + name, nameExtended)
-      }
-    }
-  })
-}
-
 function saveImage() {
   // var canvas = document.getElementById("qr");
   // var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
