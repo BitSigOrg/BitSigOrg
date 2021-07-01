@@ -180,6 +180,9 @@ function connectToTwitter() {
         if (username !== null && username !== "" && firebaseUsername !== "") {
           firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("twitter_username").set(username);
           firebase.database().ref("users").child(firebaseUsername).child("twitter_username").set(username);
+
+          // set "connected"
+         document.getElementById("connect-twitter").innerHTML = '<i class="fab fa-twitter"></i> ' + username;
         }
       }
     }
