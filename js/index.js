@@ -154,7 +154,7 @@ function closeSigning() {
 
 function sendVerificationCode() {
   let email = document.getElementById("modal-email").value;
-  let name = document.getElementById("modal-name").value;
+  var name = document.getElementById("modal-name").value;
   var actionCodeSettings = {
 
 
@@ -169,7 +169,10 @@ function sendVerificationCode() {
     // should add a timestamp to the signature
 
     // Change the QR code to be bitsig.com/token?token_id=1 and just redirect to bitsig.com
-    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&message=' + signedMessage + '&ethaddress=' + ethaddress + '&name=' + name.replace(/ /g,"%20") + "&email=" + email,
+    if (name != "") {
+      name = name.replace(/ /g,"%20");
+    }
+    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&message=' + signedMessage + '&ethaddress=' + ethaddress + '&name=' + name + "&email=" + email,
     handleCodeInApp: true
   };
   firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
