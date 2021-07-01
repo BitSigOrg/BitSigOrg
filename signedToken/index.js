@@ -229,11 +229,46 @@ function addTextToImageNameExtended(imagePath, sigNum, name, name_extended) {
     };
 }
 
+function loadPicture() {
+  let params = (new URL(document.location)).searchParams;
+  var name = params.get('name');
+  if (name != "" && name != null) {
+    name = name.replace(/%20/g," ");
+  }
+  else {
+    name = "";
+  }
+
+  var nameExtended = ""
+  if (name.length > 23) {
+    nameExtended = name.substring(23)
+    name = name.substring(0,23);
+  }
+
+  firebase.database().ref("users").child(user.uid).child("tokens_signed").child("1").get().then((snapshot) => {
+    if (snapshot.exists()) {
+      let num = snapshot.val()
+      if (name == "") {
+        addTextToImage('img/ticket_10.jpg', "Signature #" + num.toString())
+      }
+      else if (nameExtended == "") {
+        addTextToImageName('img/ticket_10_name.jpg', "Signature #" + num.toString(), "Signer: " + name)
+      }
+      else {
+        addTextToImageNameExtended('img/ticket_10_name_extended.jpg', "Signature #" + num.toString(), "Signer: " + name, nameExtended)
+      }
+    }
+  })
+}
+
 window.addEventListener('load', async () => {
   let params = (new URL(document.location)).searchParams;
   var name = params.get('name');
-  if (name != "") {
+  if (name != "" && name != null) {
     name = name.replace(/%20/g," ");
+  }
+  else {
+    name = "";
   }
   
   let ethaddress = params.get('ethaddress');
@@ -242,22 +277,6 @@ window.addEventListener('load', async () => {
   console.log(name);
   console.log(signature);
   console.log(message)
-
-  var nameExtended = ""
-  if (name.length > 23) {
-    nameExtended = name.substring(23)
-    name = name.substring(0,23);
-  }
-  if (name == "") {
-    addTextToImage('img/ticket_10.jpg', "Signature #133244")
-  }
-  else if (nameExtended == "") {
-    addTextToImageName('img/ticket_10_name.jpg', "Signature #133244", "Signer: " + name)
-  }
-  else {
-    addTextToImageNameExtended('img/ticket_10_name_extended.jpg', "Signature #133244", "Signer: " + name, nameExtended)
-  }
-  
 
   if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
     var email = window.localStorage.getItem('emailForSignIn');
@@ -293,10 +312,14 @@ window.addEventListener('load', async () => {
                   console.log("error")
                 } else {
                   console.log("successfully signed")
+                  loadPicture()
                 }
               });
             }
           });
+        }
+        else {
+          loadPicture()   
         }
       }).catch((error) => {
         console.error(error);
