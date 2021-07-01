@@ -289,7 +289,7 @@ window.addEventListener('load', async () => {
       })
     } else {
       console.log("not signed in")
-      // window.location.replace('https://bitsig.org/');
+      window.location.replace('https://bitsig.org/');
     }
   });
 

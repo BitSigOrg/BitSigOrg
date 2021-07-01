@@ -211,7 +211,8 @@ h6 {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0,0.4); /* Fallback color */ 
 }
-#confirmation-modal-content {
+
+#twitter-modal-content {
   background-color: #fefefe;
   border-radius: 20px;
   border-width: 0px;
@@ -220,23 +221,50 @@ h6 {
   left: 50%;
   top: 50%;
   width: 80%;
-  height: 200px;
   transform: translate(-50%, -50%);
+  padding: 40px;
 }
 
-#modal-email-info {
-  word-wrap: break-word;
-  text-align: center;
-  font-weight: bold;
-  font-size: 17px;
+#twitter-container {
   display: flex;
   justify-content: center;
 }
 
+#name-container-2 {
+  display: flex;
+  justify-content: center;
+}
+
+#twitter-info-container {
+  display: flex;
+  justify-content: center; 
+}
+
+#twitter-info-container-2 {
+  display: flex;
+  justify-content: center; 
+}
+
+
 @media (min-width: 768px) {
-  #confirmation-modal-content {
-    width: 500px;
+  #twitter-modal-content {
+    width: 350px;
   }
+}
+
+.twitter-button:focus {
+  outline:0;
+}
+
+.twitter-button {
+  width: 250px;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #00a66c;
+  background-color: white;
 }
 
 #modal-close-container {
