@@ -153,11 +153,9 @@ function closeSigning() {
 }
 
 function connectSignature(uid) {
-  let email = document.getElementById("modal-email").value;
   firebase.database().ref("users").child(uid).get().then((snapshot) => {
     if (!snapshot.exists()) {
       firebase.database().ref('users').child(uid).set({
-        email: email,
         eth_address: ethaddress,
         name: name,
         twitter_username: ""
