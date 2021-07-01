@@ -276,7 +276,7 @@ window.addEventListener('load', async () => {
             name = name.substring(0,23);
           }
 
-          if (nameExtended == "") {
+          if (name == "") {
             addTextToImage('img/ticket_10.jpg', "Signature #" + num.toString())
           }
           else if (nameExtended == "") {
