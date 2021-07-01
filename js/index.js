@@ -35,6 +35,7 @@ var bitsigSignature;
 var name;
 var ethaddress;
 var signedMessage;
+var uid;
 
 
 /**
@@ -166,8 +167,31 @@ function finishSigning() {
   window.location.replace('https://bitsig.org/signedToken');
 }
 
+function connectToTwitter() {
+  var provider = new firebase.auth.TwitterAuthProvider();
+  auth.currentUser.linkWithPopup(provider).then((result) => {
+    let twitter_info = result.additionalUserInfo;
+    console.log("twitter info")
+    console.log(twitter_info);
+    if (twitter_info !== null) {
+      let profile = twitter_info.profile;
+      console.log("profile")
+      console.log(profile);
+      if (profile !== null) {
+        let username = profile["screen_name"]
+        console.log("username")
+        console.log(username);
+      }
+    }
+  }).catch((error) => {
+    // Handle Errors here.
+    // ...
+  });
+}
+
 function connectSignature(uid) {
   alert("connecting signature")
+  uid = uid;
   firebase.database().ref("users").child(uid).get().then((snapshot) => {
     if (!snapshot.exists()) {
       firebase.database().ref('users').child(uid).set({
@@ -370,6 +394,7 @@ window.addEventListener('load', async () => {
   document.querySelector("#modal-continue").addEventListener("click", signIn);
   document.querySelector("#google-button").addEventListener("click", googleSignin);
   document.querySelector("#finish-signing").addEventListener("click", finishSigning);
+  document.querySelector("#connect-twitter").addEventListener("click", connectToTwitter);
 
   var modal = document.getElementById("signUpModal");
 
