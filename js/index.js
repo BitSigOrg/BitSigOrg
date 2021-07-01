@@ -36,6 +36,7 @@ var name;
 var ethaddress;
 var signedMessage;
 var uid;
+var twitterUsername = "";
 
 
 /**
@@ -158,10 +159,15 @@ function finishSigning() {
   var new_name = document.getElementById("modal-name-2").value;
   if (new_name == null) {
     new_name = "";
-    firebase.database().ref('tokens').child("1").child("signer_users").child(uid).child("name").set(new_name);
   }
-  if (new_name !== name ){
+  if (new_name !== "" && new_name !== name ){
+    firebase.database().ref('tokens').child("1").child("signer_users").child(uid).child("name").set(new_name);
+    firebase.database().ref('users').child(uid).child("name").set(new_name);
+  }
 
+  if (twitterUsername !== "" ) {
+    firebase.database().ref('tokens').child("1").child("signer_users").child(uid).child("name").set(new_name);
+    firebase.database().ref('users').child(uid).child("twitter_username").set(twitterUsername);
   }
   document.querySelector("#addNameTwitterModal").style.display = "none";
   window.location.replace('https://bitsig.org/signedToken');
@@ -181,6 +187,7 @@ function connectToTwitter() {
         let username = profile["screen_name"]
         console.log("username")
         console.log(username);
+        twitterUsername = username;
       }
     }
   }).catch((error) => {
