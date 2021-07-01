@@ -34,6 +34,7 @@ let selectedAccount;
 var bitsigSignature;
 var name;
 var ethaddress;
+var signedMessage;
 
 
 /**
@@ -165,10 +166,10 @@ function sendVerificationCode() {
     // Add their signature to the token
     // Will have option to connect their twitter
 
-    // MAKE THE DATABASE RULES SOLID SINCE API KEY IS PUBLIC
+    // should add a timestamp to the signature
+
     // Change the QR code to be bitsig.com/token?token_id=1 and just redirect to bitsig.com
-    // Have the code be just for signing the token, not entering the app necessarily
-    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&ethaddress=' + ethaddress + '&name=' + name + "&email=" + email,
+    url: 'https://bitsig.org/signedToken?signature=' + bitsigSignature + '&message=' + signedMessage + '&ethaddress=' + ethaddress + '&name=' + name.replace(/ /g,"%20") + "&email=" + email,
     handleCodeInApp: true
   };
   firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
@@ -195,7 +196,9 @@ function sendVerificationCode() {
 async function sign() {
   const web3 = new Web3(provider);
   const accounts = await web3.eth.getAccounts();
-  var message = "contractAddress=abcd&tokenId=1"
+  const secondsSinceEpoch = Math.round(Date.now() / 1000)
+  var message = "contractAddress=abcd&tokenId=1" + "&timestamp=" + secondsSinceEpoch;
+  signedMessage = message;
   var hash = web3.utils.sha3(message)
 
   var sign_modal = document.getElementById("askForSignModal");

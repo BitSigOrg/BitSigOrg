@@ -169,15 +169,91 @@ async function onDisconnect() {
   document.querySelector("#sign_button").style.display = "none";
 }
 
+function addTextToImage(imagePath, sigNum) {
+    var canvas = document.getElementById("qr");
+    canvas.width = 2048;
+    canvas.height = 2408;
+    var context = canvas.getContext("2d");
+
+    var img = new Image();
+    img.src = imagePath;
+    img.onload = function () {
+        context.drawImage(img, 0, 0, img.width, img.height,0, 0, canvas.width, canvas.height);
+        context.lineWidth = 1;
+        context.fillStyle = "#27bd82";
+        // context.lineStyle = "#ffff00";
+        context.font = "bolder 98px avenir";
+
+        context.fillText(sigNum, 710 - (25 * (sigNum.length-13)), 310)
+    };
+}
+
+function addTextToImageName(imagePath, sigNum, name) {
+    var canvas = document.getElementById("qr");
+    canvas.width = 2048;
+    canvas.height = 2408;
+    var context = canvas.getContext("2d");
+
+    var img = new Image();
+    img.src = imagePath;
+    img.onload = function () {
+        context.drawImage(img, 0, 0, img.width, img.height,0, 0, canvas.width, canvas.height);
+        context.lineWidth = 1;
+        context.fillStyle = "#27bd82";
+        // context.lineStyle = "#ffff00";
+        context.font = "bolder 98px avenir";
+
+        context.fillText(sigNum, 710 - (25 * (sigNum.length-13)), 310)
+        context.fillText(name, 710 - (25 * (name.length-13)), 460)
+    };
+}
+
+function addTextToImageNameExtended(imagePath, sigNum, name, name_extended) {
+    var canvas = document.getElementById("qr");
+    canvas.width = 2048;
+    canvas.height = 2408;
+    var context = canvas.getContext("2d");
+
+    var img = new Image();
+    img.src = imagePath;
+    img.onload = function () {
+        context.drawImage(img, 0, 0, img.width, img.height,0, 0, canvas.width, canvas.height);
+        context.lineWidth = 1;
+        context.fillStyle = "#27bd82";
+        // context.lineStyle = "#ffff00";
+        context.font = "bolder 98px avenir";
+
+        context.fillText(sigNum, 710 - (25 * (sigNum.length-13)), 310)
+        context.fillText(name, 710 - (25 * (name.length-13)), 460)
+        context.fillText(name_extended, 710 - (25 * (name.length-13)), 580)
+    };
+}
 
 window.addEventListener('load', async () => {
-  // Confirm the link is a sign-in with email link.
   let params = (new URL(document.location)).searchParams;
-  let name = params.get('name');
+  var name = params.get('name').replace(/%20/g," ");
   let ethaddress = params.get('ethaddress');
-  let signature = params.get('signature')
+  let signature = params.get('signature');
+  let message = params.get('message');
   console.log(name);
   console.log(signature);
+  console.log(message)
+
+  var nameExtended = ""
+  if (name.length > 23) {
+    nameExtended = name.substring(23)
+    name = name.substring(0,23);
+  }
+  if (name == "") {
+    addTextToImage('img/ticket_10.jpg', "Signature #133244")
+  }
+  else if (nameExtended == "") {
+    addTextToImageName('img/ticket_10_name.jpg', "Signature #133244", "Signer: " + name)
+  }
+  else {
+    addTextToImageNameExtended('img/ticket_10_name_extended.jpg', "Signature #133244", "Signer: " + name, nameExtended)
+  }
+  
 
   if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
     var email = window.localStorage.getItem('emailForSignIn');
@@ -204,7 +280,7 @@ window.addEventListener('load', async () => {
             } else {
               firebase.database().ref('tokens').child("1").child("signer_users").child(user.uid).set({
                 ethereum_address: ethaddress,
-                message: "contractAddress:abcd_tokenId:1",
+                message: message,
                 name: name,
                 signature: signature,
                 num_signer: 1
