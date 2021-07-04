@@ -35,7 +35,7 @@ var bitsigSignature;
 var name;
 var ethaddress;
 var signedMessage;
-var firebaseUsername = "";
+var firebaseUID = "";
 var twitterUsername = "";
 
 
@@ -160,9 +160,9 @@ function finishSigning() {
   if (new_name == null) {
     new_name = "";
   }
-  if (new_name !== "" && new_name !== name && firebaseUsername !== ""){
-    firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("name").set(new_name);
-    firebase.database().ref("users").child(firebaseUsername).child("name").set(new_name);
+  if (new_name !== "" && new_name !== name && firebaseUID !== ""){
+    firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUID).child("name").set(new_name);
+    firebase.database().ref("users").child(firebaseUID).child("name").set(new_name);
   }
   document.querySelector("#addNameTwitterModal").style.display = "none";
   window.location.replace('https://bitsig.org/signedToken');
@@ -176,10 +176,30 @@ function connectToTwitter() {
       let profile = twitter_info.profile;
       if (profile !== null) {
         let username = profile["screen_name"]
+        let profile_image_url = profile["profile_image_url"]
+        let verified = profile["verified"]
+        let followers_count = profile["followers_count"]
+        let id = profile["id_str"]
         twitterUsername = username;
-        if (username !== null && username !== "" && firebaseUsername !== "") {
-          firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUsername).child("twitter_username").set(username);
-          firebase.database().ref("users").child(firebaseUsername).child("twitter_username").set(username);
+        if (username !== null && username !== "" && firebaseUID !== "") {
+          firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUID).child("twitter_username").set(username);
+          firebase.database().ref("users").child(firebaseUID).child("twitter_username").set(username);
+
+          firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUID).child("followers_count").set(followers_count);
+          firebase.database().ref("users").child(firebaseUID).child("followers_count").set(followers_count);
+
+          firebase.database().ref('twitter_users').child(username).set({
+            twitter_id: id,
+            profile_image_url: profile_image_url,
+            verified: verified,
+            bitsigID: firebaseUID
+          }, (error) => {
+            if (error) {
+              console.log("error")
+            } else {
+              console.log("connected twitter")
+            }
+          });
 
           // set "connected"
          document.getElementById("connect-twitter").innerHTML = '<i class="fab fa-twitter"></i> ' + username;
@@ -204,6 +224,7 @@ function connectSignature(uid) {
         if (error) {
           console.log("failed to create user in database")
         } else {
+          firebase.database().ref("users").child(firebaseUID).child("asked_for_name").set(true);
           firebase.database().ref('tokens').child("1").child("signer_users").child(uid).set({
             ethereum_address: ethaddress,
             message: signedMessage,
@@ -240,7 +261,7 @@ function signIn() {
   if (password == password2) {
     firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
       var user = userCredential.user;
-      firebaseUsername = user.uid;
+      firebaseUID = user.uid;
       connectSignature(user.uid);
     })
     .catch((error) => {
@@ -283,7 +304,7 @@ function googleSignin() {
     var credential = result.credential;
     var token = credential.accessToken;
     var user = result.user;
-    firebaseUsername = user.uid;
+    firebaseUID = user.uid;
 
     connectSignature(user.uid);
   }).catch((error) => {
