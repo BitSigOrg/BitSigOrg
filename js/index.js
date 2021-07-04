@@ -178,6 +178,10 @@ function connectToTwitter() {
         let username = profile["screen_name"]
         let profile_image_url = profile["profile_image_url"]
         let verified = profile["verified"]
+        var verified_num = "0"
+        if (verified) {
+          verified_num = "1"
+        }
         let followers_count = profile["followers_count"]
         let id = profile["id_str"]
         twitterUsername = username;
