@@ -188,11 +188,10 @@ function connectToTwitter() {
           firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUID).child("followers_count").set(followers_count);
           firebase.database().ref("users").child(firebaseUID).child("followers_count").set(followers_count);
 
-          firebase.database().ref('twitter_users').child(username).set({
+          firebase.database().ref('twitter_users').child(username).child(firebaseUID).set({
             twitter_id: id,
             profile_image_url: profile_image_url,
-            verified: verified,
-            bitsigID: firebaseUID
+            verified: verified
           }, (error) => {
             if (error) {
               console.log("error")
