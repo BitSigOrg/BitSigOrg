@@ -195,7 +195,7 @@ function connectToTwitter() {
           firebase.database().ref('twitter_users').child(username).child(firebaseUID).set({
             twitter_id: id,
             profile_image_url: profile_image_url,
-            verified: verified,
+            verified: verified_num,
             twitter_followers_count: followers_count
           }, (error) => {
             if (error) {
@@ -217,7 +217,6 @@ function connectToTwitter() {
 }
 
 function connectSignature(uid) {
-  alert("connecting signature")
   firebase.database().ref("users").child(uid).get().then((snapshot) => {
     if (!snapshot.exists()) {
       firebase.database().ref('users').child(uid).set({
