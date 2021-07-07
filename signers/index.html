@@ -29,27 +29,49 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
 
   <!-- Custom styles for this template -->
   <link href="css/landing-page.css" rel="stylesheet">
 </head>
-<body>  
-
-   <div class="row mx-auto" style="background-color: #FFF; height: 9%;">
-      <div class="col-md-auto text-center brand-logo mx-auto">
-        <a href=""><img src="img/Logo.png" alt=""/></a>
-      </div>
+<body>
+  <div class="row mx-auto" style="background-color: #FFF; height: 9%;">
+    <div class="col-md-auto text-center brand-logo mx-auto my-auto" >
+      <a href="../index.html" id="logo-container"><img src="../img/Logo.png" alt=""/></a>
     </div>
+  </div>
 
   <main class="scroll-container">
+
     <section>
       <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">Coming Soon.</p>
-                <p class="desc_text">Once we launch, this page will show who's signed the token, along with an (optional) link to their twitter.</p>
-                <br/>
-                <a href="../index.html"><p class="signers_text"><i class="fas fa-angle-left"></i> Go Back</p></a>
+        <div class="row mx-auto mb-1">
+            <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+              <p id="signers_title">Token #1</p>
+            </div>
+        </div>
+        <div class="row mx-auto mt-4">
+            <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+              <p>Order By:</p>
+              <button class="filter_button" id="first_signers_button">First Signers</button>
+              <button class="filter_button" id="latest_signers_button">Latest Signers</button>
+              <button class="filter_button" id="twitter_followers_button"># Twitter Followers</button>
+              <br><br/>
+              <a href="https://ipfs.io"><p class="signers_text">View raw signers file <i class="fas fa-angle-right"></i></p></a>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container" id="signers">
+        <!-- Insert signers here programatically -->
+         <div class="row mx-auto mt-5 mb-1">
+            <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+              <p id="signers_title">Loading Signers...</p>
             </div>
         </div>
       </div>
@@ -57,7 +79,7 @@
 
 
   <!-- Footer -->
-  <footer class="footer">
+<!--   <footer class="footer">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 h-100 text-center my-auto mx-auto">
@@ -66,11 +88,12 @@
       </div>
     </div>
   </footer>
-
+ -->
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
 
 </body>
 </html>
