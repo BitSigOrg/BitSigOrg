@@ -442,16 +442,16 @@ a:link{
 }
 
 .desc_text_highlighted {
-  font-family:avenir;
+  font-family:helvetica;
   font-size: 15px;
   font-weight: bold;
   color: #27bd82;
 }
 
 .desc_text {
-  font-family:avenir;
+  font-family:helvetica;
   font-size: 15px;
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 
 @media (min-width: 768px) {
