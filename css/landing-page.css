@@ -18,6 +18,18 @@ h6 {
   font-weight: 700;
 }
 
+#logo-container {
+  display: flex; 
+  justify-content: center;
+}
+
+@media (min-width: 600px) {
+  #logo-container {
+    display: flex; 
+    justify-content: flex-end;
+  }
+}
+
 #app-beta-container {
   display: flex; 
   justify-content: center;
@@ -688,6 +700,24 @@ header.masthead h1 {
   color: #00a66c
 }
 
+#social-mobile {
+  display: inline;
+}
+
+#social-big {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  #social-mobile {
+    display: none;
+  }
+
+  #social-big {
+    display: inline;
+  }
+}
+
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: #27bd82 !important;
     border-width: 0;
@@ -700,7 +730,7 @@ header.masthead h1 {
   padding-bottom: 1rem;
 }
 
-@media (min-width: 600) {
+@media (min-width: 600px) {
   .features-icons {
     padding-top: 1rem;
     padding-bottom: 4rem;

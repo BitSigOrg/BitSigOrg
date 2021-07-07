@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TL8GNHF3XS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-TL8GNHF3XS');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>BitSig</title>
+
+  <link rel="icon" type="image/png" href="img/icon_16.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="img/icon_32.png" sizes="32x32">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+  <!-- Custom styles for this template -->
+  <link href="css/landing-page.css" rel="stylesheet">
+</head>
+<body>
+  <div class="row mx-auto" style="background-color: #FFF; height: 9%;">
+    <div class="col-md-auto text-center brand-logo mx-auto my-auto" >
+      <a href="../index.html" id="logo-container"><img src="../img/Logo.png" alt=""/></a>
+    </div>
+  </div>
+
+  <main class="scroll-container">
+
+    <section>
+      <div class="container">
+        <div class="row mx-auto mb-1">
+            <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+              <p id="signers_title">Token #1</p>
+            </div>
+        </div>
+        <div class="row mx-auto mt-4">
+            <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+              <p>Order By:</p>
+              <button class="filter_button" id="first_signers_button">First Signers</button>
+              <button class="filter_button" id="latest_signers_button">Latest Signers</button>
+              <button class="filter_button" id="twitter_followers_button"># Twitter Followers</button>
+              <br><br/>
+              <a href="https://ipfs.io"><p class="signers_text">View raw signers file <i class="fas fa-angle-right"></i></p></a>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container" id="signers">
+        <!-- Insert signers here programatically -->
+         <div class="row mx-auto mt-5 mb-1">
+            <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
+              <p id="signers_title">Loading Signers...</p>
+            </div>
+        </div>
+      </div>
+    </section>
+
+
+  <!-- Footer -->
+<!--   <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 h-100 text-center my-auto mx-auto">
+          <p class="text-muted small mb-4 mb-lg-0">&copy; BitSig 2021. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+ -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="./index.js"></script>
+
+</body>
+</html>

@@ -258,17 +258,11 @@ window.addEventListener('load', async () => {
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      console.log("signed in");
       var uid = user.uid;
-      console.log(uid);
       firebase.database().ref("tokens").child("1").child("signer_users").child(uid).get().then((snapshot) => {
-        console.log("1")
         if (snapshot.exists()) {
-          console.log("2")
           let num = snapshot.val().num_signer;
-          console.log(num)
           let name = snapshot.val().name;
-          console.log(name)
 
           var nameExtended = ""
           if (name.length > 23) {
@@ -277,13 +271,13 @@ window.addEventListener('load', async () => {
           }
 
           if (name == "") {
-            addTextToImage('img/ticket_10.jpg', "Signature #" + num.toString())
+            addTextToImage('img/ticket_11.jpg', "Signature #" + num.toString())
           }
           else if (nameExtended == "") {
-            addTextToImageName('img/ticket_10_name.jpg', "Signature #" + num.toString(), "Signer: " + name)
+            addTextToImageName('img/ticket_11_name.jpg', "Signature #" + num.toString(), "Signer: " + name)
           }
           else {
-            addTextToImageNameExtended('img/ticket_10_name_extended.jpg', "Signature #" + num.toString(), "Signer: " + name, nameExtended)
+            addTextToImageNameExtended('img/ticket_11_name_extended.jpg', "Signature #" + num.toString(), "Signer: " + name, nameExtended)
           }
         }
       })
