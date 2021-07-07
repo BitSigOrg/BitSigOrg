@@ -227,7 +227,6 @@ function viewByTwitterFollowers() {
 }
 
 function search(e) {
-  console.log("searching")
   let val = e.target.value;
   var signers = []
 
