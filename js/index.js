@@ -229,7 +229,7 @@ function connectSignature(uid) {
         } else {
           firebase.database().ref("users").child(firebaseUID).child("asked_for_name").set(true);
           firebase.database().ref('tokens').child("1").child("signer_users").child(uid).set({
-            ethereum_address: ethaddress,
+            eth_address: ethaddress,
             message: signedMessage,
             name: name,
             signature: bitsigSignature,

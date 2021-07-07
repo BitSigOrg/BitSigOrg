@@ -39,7 +39,7 @@ function viewLatestSigners() {
       document.getElementById("signers").innerHTML = ""
       snapshotToArray(snapshot).reverse().forEach(function(snapshot_user) {
         let val = snapshot_user.val();
-        let eth_address = val.ethereum_address;
+        let eth_address = val.eth_address;
         let name = val.name;
         let num_signer = val.num_signer;
         let profileImageUrl = val.profileImageUrl;
@@ -91,7 +91,7 @@ function viewFirstSigners() {
       // let name = snapshot.val().name;
       snapshot.forEach(function(snapshot_user) {
         let val = snapshot_user.val();
-        let eth_address = val.ethereum_address;
+        let eth_address = val.eth_address;
         let name = val.name;
         let num_signer = val.num_signer;
         let profileImageUrl = val.profileImageUrl;
@@ -142,7 +142,7 @@ function viewByTwitterFollowers() {
       document.getElementById("signers").innerHTML = ""
       snapshotToArray(snapshot).reverse().forEach(function(snapshot_user) {
         let val = snapshot_user.val();
-        let eth_address = val.ethereum_address;
+        let eth_address = val.eth_address;
         let name = val.name;
         let num_signer = val.num_signer;
         let profileImageUrl = val.profileImageUrl;

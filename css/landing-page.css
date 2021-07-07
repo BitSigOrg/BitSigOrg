@@ -390,6 +390,7 @@ h6 {
   font-weight: bold;
   font-size: 20px;
   background-color: rgb(240,240,240);
+  width: 200px;
 }
 
 .connect_wallet:focus {
