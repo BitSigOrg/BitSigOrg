@@ -285,12 +285,12 @@ async function sign() {
   const secondsSinceEpoch = Math.round(Date.now() / 1000)
   var message = "contractAddress=abcd&tokenId=1" + "&timestamp=" + secondsSinceEpoch;
   signedMessage = message;
-  var hash = web3.utils.sha3(message)
+  // var hash = web3.utils.sha3(message)
 
   var sign_modal = document.getElementById("askForSignModal");
   sign_modal.style.display = "block";
 
-  var signature = await web3.eth.personal.sign(hash, accounts[0]);
+  var signature = await web3.eth.personal.sign(message, accounts[0]);
   window.localStorage.setItem('bitsigSignature', signature);
   bitsigSignature = signature;
 
