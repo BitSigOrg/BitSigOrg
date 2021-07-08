@@ -77,11 +77,11 @@ function viewLatestSigners() {
   document.getElementById("twitter_followers_button").style.backgroundColor = "#85d2b7";
   document.getElementById("signers").innerHTML = ""
 
-  setInterval(function() {
+  setTimeout(function() {
     if (document.getElementById("signers").innerHTML == "") {
         document.getElementById("signers").innerHTML = '<div class="row mx-auto mt-5 mb-1"><div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p id="signers_title">Loading Signers...</p></div></div>'
     }
-  }, 1000);
+  }, 2000);
 
   firebase.database().ref("tokens").child("1").child("signer_users").orderByChild("num_signer").limitToLast(100).get().then((snapshot) => {
     if (snapshot.exists()) {
@@ -128,11 +128,11 @@ function viewFirstSigners() {
   document.getElementById("twitter_followers_button").style.backgroundColor = "#85d2b7";
   document.getElementById("signers").innerHTML = ""
 
-  setInterval(function() {
+  setTimeout(function() {
     if (document.getElementById("signers").innerHTML == "") {
         document.getElementById("signers").innerHTML = '<div class="row mx-auto mt-5 mb-1"><div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p id="signers_title">Loading Signers...</p></div></div>'
     }
-  }, 1000);
+  }, 2000);
 
   firebase.database().ref("tokens").child("1").child("signer_users").orderByChild("num_signer").limitToFirst(100).get().then((snapshot) => {
     if (snapshot.exists()) {
@@ -181,11 +181,11 @@ function viewByTwitterFollowers() {
   document.getElementById("twitter_followers_button").style.backgroundColor = "#00a66c";
   document.getElementById("signers").innerHTML = ""
 
-  setInterval(function() {
+  setTimeout(function() {
     if (document.getElementById("signers").innerHTML == "") {
         document.getElementById("signers").innerHTML = '<div class="row mx-auto mt-5 mb-1"><div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p id="signers_title">Loading Signers...</p></div></div>'
     }
-  }, 1000);
+  }, 2000);
 
 
   firebase.database().ref("tokens").child("1").child("signer_users").orderByChild("twitter_followers_count").limitToLast(100).get().then((snapshot) => {
@@ -229,6 +229,7 @@ function viewByTwitterFollowers() {
 function search(e) {
   let val = e.target.value;
   var signers = []
+  var searchEnded = false
 
   if (val == "") {
     document.getElementById("signers").innerHTML = ""
@@ -249,6 +250,13 @@ function search(e) {
   // add each signer to the page
   var sync = new DispatchGroup();
   var token_0 = sync.enter()
+
+  document.getElementById("signers").innerHTML = ""
+  setTimeout(function() {
+    if (document.getElementById("signers").innerHTML == "" && searchEnded == false) {
+        document.getElementById("signers").innerHTML = '<div class="row mx-auto mt-5 mb-1"><div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p id="signers_title">Loading Signers...</p></div></div>'
+    }
+  }, 2000);
 
   var token_1 = sync.enter()
   firebase.database().ref("tokens").child("1").child("signer_users").orderByChild("name").startAt(val).endAt(val + "\u{f8ff}").limitToLast(30).get().then((snapshot) => {
@@ -288,6 +296,8 @@ function search(e) {
 
   sync.leave(token_0);
   sync.notify(function() {
+    document.getElementById("signers").innerHTML = ""
+    searchEnded = true
     if (signers.length > 0) {
       document.getElementById("signers").innerHTML = ""
       signers.forEach(function(snapshot_user) {
@@ -330,7 +340,7 @@ window.addEventListener('load', async () => {
   firebase.database().ref("numSignersForToken").child("1").get().then((snapshot) => {
     if (snapshot.exists()) {
       let num = snapshot.val();
-      document.getElementById("signers_title").innerHTML = "The first signable NFT has:<br/>" + num.toString() + " Signers"
+      document.getElementById("signers_title").innerHTML = "The first signable NFT<br/>" + num.toString() + " Signers"
     }
   });
 
