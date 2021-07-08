@@ -210,6 +210,76 @@ h6 {
   }
 }
 
+/* -------- */
+#appBetaModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0,0.4); /* Fallback color */ 
+}
+
+#beta-modal-content {
+  background-color: #fefefe;
+  border-radius: 20px;
+  border-width: 0px;
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  padding: 40px;
+}
+
+#app-label-beta-container {
+  display: flex;
+  justify-content: center; 
+}
+
+#appBetaLabel {
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+}
+
+#beta-email {
+  display: flex;
+  justify-content: center;
+}
+
+#close-beta {
+  background-color: white;
+  border-style: none;
+  color: #00a66c;
+  margin-top: 20px;
+}
+
+#close-beta:focus {
+  outline:0;
+}
+
+#beta-modal-join-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  #beta-modal-content {
+    width: 350px;
+  }
+}
+
+/* -------- */
+
 /* ------ */
 #addNameTwitterModal {
   display: none; /* Hidden by default */

@@ -323,6 +323,41 @@ function googleSignin() {
   });
 }
 
+function stringToHex(str) {
+
+  //converting string into buffer
+   let bufStr = Buffer.from(str, 'utf8');
+
+  //with buffer, you can convert it into hex with following code
+   return bufStr.toString('hex');
+
+   }
+
+function showAppBeta() {
+  document.querySelector("#appBetaModal").style.display = "block";
+}
+
+function closeBeta() {
+  document.querySelector("#appBetaModal").style.display = "none";
+}
+
+function joinBeta() {
+  let email = document.getElementById("beta-email-input").value;
+  if (email != "") {
+    var encodedEmail = window.btoa(email);
+    firebase.database().ref("beta_emails").child(encodedEmail).set(email);
+    document.getElementById("join-beta").style.backgroundColor = "white";
+    document.getElementById("join-beta").style.color = "#00a66c";
+    document.getElementById("join-beta").innerHTML = "Joined!"
+    document.getElementById("join-beta").style.boxShadow = "0px 0px 0px";
+
+    setTimeout(function() {
+      document.querySelector("#appBetaModal").style.display = "none";
+    }, 1000);
+    
+  }
+}
+
 /**
  * Fetch account data for UI when
  * - User switches accounts in wallet
@@ -424,6 +459,9 @@ window.addEventListener('load', async () => {
   document.querySelector("#google-button").addEventListener("click", googleSignin);
   document.querySelector("#finish-signing").addEventListener("click", finishSigning);
   document.querySelector("#connect-twitter").addEventListener("click", connectToTwitter);
+  document.querySelector("#app-beta").addEventListener("click", showAppBeta);
+  document.querySelector("#close-beta").addEventListener("click", closeBeta);
+  document.querySelector("#join-beta").addEventListener("click", joinBeta);
 
   var modal = document.getElementById("signUpModal");
 
