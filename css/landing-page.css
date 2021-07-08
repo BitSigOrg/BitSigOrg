@@ -373,7 +373,7 @@ h6 {
 }
 
 #app-beta {
-  width: 200px;
+  width: 220px;
   border-width: 0;
   border-radius: 10px;
   padding: 20px;
@@ -402,7 +402,7 @@ h6 {
 
 #sign_button {
   display: none;
-  width: 200px;
+  width: 220px;
   border-width: 0;
   border-radius: 10px;
   padding: 20px;
@@ -460,7 +460,7 @@ h6 {
   font-weight: bold;
   font-size: 20px;
   background-color: rgb(240,240,240);
-  width: 200px;
+  width: 220px;
 }
 
 .connect_wallet:focus {

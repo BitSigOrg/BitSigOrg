@@ -88,7 +88,7 @@
         </div>
         <div class="row mx-auto mb-1 mt-4">
           <div class="col-lg-6 col-md-6 my-auto" id="app-beta-container">
-            <button id="app-beta">Sign with the App</button>
+            <button id="app-beta">Sign with Beta App</button>
           </div>
     <!--       <div class="col-lg-8 col-md-8 text-left my-auto mx-auto">
             <p class="skip_text">Skip the waitlist with the code "first1000".</p>
@@ -242,7 +242,7 @@
         <div class="row mx-auto mb-1 mt-4">
             <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
                 <p class="desc_text_highlighted">How does it work?</p>
-                <p class="desc_text">When signing a token, the BitSig app (or your wallet) signs a message under the format:</p><p class="desc_text" style="color: rgb(120, 120, 120)">"contractAddress=address&tokenId=ID",</p><p class="desc_text">which is a unique identifier of the token. The message, digital signature, and your public key are added to a file holding all of the signatures so that anyone can verify them. <a href="https://etherscan.io/verifySig">https://etherscan.io/verifySig</a></p>
+                <p class="desc_text">When signing a token, the BitSig app (or your wallet) signs a message under the format:</p><p class="desc_text" style="color: rgb(120, 120, 120)">"contractAddress=address&tokenId=ID&Timestamp=timestamp",</p><p class="desc_text">which is a unique identifier of the token. The message, digital signature, and your public key are added to a file holding all of the signatures so that anyone can verify them. <a href="https://etherscan.io/verifySig">https://etherscan.io/verifySig</a></p>
                 <br/>
                 <p class="desc_text">The file that has all of the signatures is stored on ipfs. When more signers sign, a new file is created that includes the new signers. The new file has a link that points back to the previous file. BitSig creates the files and keeps track of the link to the latest file. The token itself can also hold the link to the latest file. By continuously setting the latest link in the token, a history of the signer files is held in the blockchain,  which ensures the validity of the chain of files. </p>
                 <br/>
@@ -328,7 +328,7 @@
         <p id="appBetaLabel">BitSig App Beta</p>
       </div>
       <div class="row mx-auto mt-4 mb-3">
-        <p>We'll email you the link for the beta when it's available for you. Until then, you can sign here with an external wallet.</p>
+        <p>We'll email you the link for the Beta when it's available for you. Until then, you can sign here with an external wallet.</p>
       </div>
       <div class="row text-center my-auto mx-auto mb-2" id="beta-email">
         <input id="beta-email-input" class="modal-text" type="Email" placeholder="Email"/>
