@@ -23,7 +23,7 @@ h6 {
   justify-content: center;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1400px) {
   #logo-container {
     display: flex; 
     justify-content: flex-end;
@@ -443,14 +443,14 @@ a:link{
 }
 
 .desc_text_highlighted {
-  font-family:helvetica;
+  font-family:sans-serif;
   font-size: 15px;
   font-weight: bold;
   color: #27bd82;
 }
 
 .desc_text {
-  font-family:helvetica;
+  font-family:sans-serif;
   font-size: 15px;
   /*font-weight: bold;*/
 }
@@ -479,7 +479,7 @@ a:link{
   }
 
   .desc_text {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
 
@@ -503,7 +503,7 @@ a:link{
   }
 
   .desc_text_highlighted {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .desc_text {
@@ -531,7 +531,7 @@ a:link{
   }
 
   .desc_text_highlighted {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .desc_text {
@@ -709,7 +709,7 @@ header.masthead h1 {
   display: none;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 1400px) {
   #social-mobile {
     display: none;
   }
