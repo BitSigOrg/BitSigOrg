@@ -283,7 +283,7 @@ async function sign() {
   const web3 = new Web3(provider);
   const accounts = await web3.eth.getAccounts();
   const secondsSinceEpoch = Math.round(Date.now() / 1000)
-  var message = "contractAddress=abcd&tokenId=1" + "&timestamp=" + secondsSinceEpoch;
+  var message = "contractAddress=0x5E474Ad3A37fEeCCBE455344822B8AbA3c9F90AA&tokenId=1" + "&timestamp=" + secondsSinceEpoch;
   signedMessage = message;
   // var hash = web3.utils.sha3(message)
 
