@@ -232,7 +232,7 @@ h6 {
 
 .qr_text_highlighted {
   font-family:avenir;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   color: #27bd82;
   text-align: center;
@@ -240,7 +240,7 @@ h6 {
 
 .qr_text {
   font-family:avenir;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
 }
