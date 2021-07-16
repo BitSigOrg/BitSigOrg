@@ -344,6 +344,14 @@ window.addEventListener('load', async () => {
     }
   });
 
+  firebase.database().ref("tokens").child("1").child("ipfs_link").get().then((snapshot) => {
+    if (snapshot.exists()) {
+      let link = snapshot.val(); 
+      let hash = link.substring(7);
+      document.getElementById("signers_link").href = "https://ipfs.io/ipfs/" + hash;
+    }
+  });
+
   document.getElementById("searchBar").addEventListener('input', search);
 
   document.getElementById("latest_signers_button").style.backgroundColor = "#85d2b7";
