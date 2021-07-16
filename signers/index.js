@@ -94,6 +94,7 @@ function viewLatestSigners() {
         let profileImageUrl = val.profileImageUrl;
         let twitter_username = val.twitter_username;
         var twitter_followers_count = val.twitter_followers_count;
+        let twitter_profile_image_url = val.twitter_profile_image_url;
         if (twitter_followers_count == null) {
           twitter_followers_count = 0;
         }
@@ -102,6 +103,9 @@ function viewLatestSigners() {
         html += '<div class="signer col-lg-6 col-md-6 text-center my-auto mx-auto">'
         if (profileImageUrl != null) {
           html += '<div class="text-center my-auto"><img class="profile-image" src="' + profileImageUrl + '"/></div>'
+        }
+        else if (twitter_profile_image_url != null) {
+          html += '<div class="text-center my-auto"><img class="profile-image" src="' + twitter_profile_image_url + '"/></div>'
         }
         html += '<div class="text-center my-auto"><strong>Signer #' + num_signer + '</strong></div>'
         if(name != null) {
@@ -147,6 +151,7 @@ function viewFirstSigners() {
         let profileImageUrl = val.profileImageUrl;
         let twitter_username = val.twitter_username;
         var twitter_followers_count = val.twitter_followers_count;
+        let twitter_profile_image_url = val.twitter_profile_image_url;
         if (twitter_followers_count == null) {
           twitter_followers_count = 0;
         }
@@ -155,6 +160,9 @@ function viewFirstSigners() {
         html += '<div class="signer col-lg-6 col-md-6 text-center my-auto mx-auto">'
         if (profileImageUrl != null) {
           html += '<div class="text-center my-auto"><img class="profile-image" src="' + profileImageUrl + '"/></div>'
+        }
+        else if (twitter_profile_image_url != null) {
+          html += '<div class="text-center my-auto"><img class="profile-image" src="' + twitter_profile_image_url + '"/></div>'
         }
         html += '<div class="text-center my-auto"><strong>Signer #' + num_signer + '</strong></div>'
         if(name != null) {
@@ -199,6 +207,7 @@ function viewByTwitterFollowers() {
         let profileImageUrl = val.profileImageUrl;
         let twitter_username = val.twitter_username;
         var twitter_followers_count = val.twitter_followers_count;
+        let twitter_profile_image_url = val.twitter_profile_image_url;
         if (twitter_followers_count == null) {
           twitter_followers_count = 0;
         }
@@ -207,6 +216,9 @@ function viewByTwitterFollowers() {
         html += '<div class="signer col-lg-6 col-md-6 text-center my-auto mx-auto">'
         if (profileImageUrl != null) {
           html += '<div class="text-center my-auto"><img class="profile-image" src="' + profileImageUrl + '"/></div>'
+        }
+        else if (twitter_profile_image_url != null) {
+          html += '<div class="text-center my-auto"><img class="profile-image" src="' + twitter_profile_image_url + '"/></div>'
         }
         html += '<div class="text-center my-auto"><strong>Signer #' + num_signer + '</strong></div>'
         if(name != null) {
@@ -308,6 +320,7 @@ function search(e) {
         let profileImageUrl = val.profileImageUrl;
         let twitter_username = val.twitter_username;
         var twitter_followers_count = val.twitter_followers_count;
+        let twitter_profile_image_url = val.twitter_profile_image_url;
         if (twitter_followers_count == null) {
           twitter_followers_count = 0;
         }
@@ -316,6 +329,9 @@ function search(e) {
         html += '<div class="signer col-lg-6 col-md-6 text-center my-auto mx-auto">'
         if (profileImageUrl != null) {
           html += '<div class="text-center my-auto"><img class="profile-image" src="' + profileImageUrl + '"/></div>'
+        }
+        else if (twitter_profile_image_url != null) {
+          html += '<div class="text-center my-auto"><img class="profile-image" src="' + twitter_profile_image_url + '"/></div>'
         }
         html += '<div class="text-center my-auto"><strong>Signer #' + num_signer + '</strong></div>'
         if(name != null) {

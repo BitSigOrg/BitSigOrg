@@ -192,6 +192,11 @@ function connectToTwitter() {
           firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUID).child("twitter_followers_count").set(followers_count);
           firebase.database().ref("users").child(firebaseUID).child("twitter_followers_count").set(followers_count);
 
+          if (profile_image_url !== null && profile_image_url !== "") {
+            firebase.database().ref("tokens").child("1").child("signer_users").child(firebaseUID).child("twitter_profile_image_url").set(profile_image_url);
+            firebase.database().ref("users").child(firebaseUID).child("twitter_profile_image_url").set(profile_image_url);
+          }
+
           firebase.database().ref('twitter_users').child(username).child(firebaseUID).set({
             twitter_id: id,
             profile_image_url: profile_image_url,
