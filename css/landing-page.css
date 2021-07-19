@@ -22,12 +22,14 @@ h6 {
 #logo-container {
   display: flex; 
   justify-content: center;
+  height: 90px;
 }
 
 @media (min-width: 1400px) {
   #logo-container {
     display: flex; 
     justify-content: flex-end;
+    height: auto;
   }
 }
 
