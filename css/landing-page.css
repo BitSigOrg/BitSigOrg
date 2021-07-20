@@ -196,6 +196,7 @@ h6 {
   height: 100px;
   transform: translate(-50%, -50%);
   padding: 10px;
+  margin-bottom: 15px;
 }
 
 #sign-modal-text {
@@ -205,7 +206,6 @@ h6 {
   width: 100%;
   line-height: 100px;
   text-align: center;
-  padding-bottom: 15px;
 }
 
 @media (min-width: 768px) {
