@@ -108,7 +108,7 @@ function viewLatestSigners() {
           html += '<div class="text-center my-auto"><img class="profile-image" src="' + twitter_profile_image_url + '"/></div>'
         }
         html += '<div class="text-center my-auto"><strong>Signer #' + num_signer + '</strong></div>'
-        if(name != null) {
+        if(name != null && name != "") {
           html += '<div class="text-left my-auto" style="padding-top: 10px;"><p><strong>Name: </strong>' + name + '</p></div>'
         }
         html += '<div class="text-left my-auto"><p><strong>Wallet Address: </strong>' + eth_address + '</p></div>'
@@ -165,7 +165,8 @@ function viewFirstSigners() {
           html += '<div class="text-center my-auto"><img class="profile-image" src="' + twitter_profile_image_url + '"/></div>'
         }
         html += '<div class="text-center my-auto"><strong>Signer #' + num_signer + '</strong></div>'
-        if(name != null) {
+        if(name != null && name != "") {
+          console.log(name);
           html += '<div class="text-left my-auto" style="padding-top: 10px;"><p><strong>Name: </strong>' + name + '</p></div>'
         }
         html += '<div class="text-left my-auto"><p><strong>Wallet Address: </strong>' + eth_address + '</p></div>'
