@@ -264,7 +264,9 @@ async function mintNFT() {
             console.log("receipt")
             console.log(receipt)
           })
-          .on('confirmation', function(confirmationNumber, receipt){ ... })
+          .on('confirmation', function(confirmationNumber, receipt){ 
+
+          })
           .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
 
         }
