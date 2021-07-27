@@ -216,13 +216,13 @@ async function mintNFT() {
 
     if (address !== null && address !== "") {
       signer_addresses.push(address)
-      addresses_values.push(parseInt(amount))
+      addresses_values.push(parseFloat(amount))
     }
     else if (twitter !== null && twitter !== "") {
       signer_twitters.push(twitter)
-      twitter_values.push(parseInt(amount))
+      twitter_values.push(parseFloat(amount))
     }
-    totalAmount += amount;
+    totalAmount += parseFloat(amount);
   }
 
   console.log(signer_addresses)
