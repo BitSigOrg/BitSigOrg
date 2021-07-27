@@ -210,9 +210,9 @@ async function mintNFT() {
   var totalAmount = 0;
 
   for (var i=0; i<num_signers; i++) {
-    var address = document.getElementById("signer_eth_addr_" + i.toString()).value;
-    var twitter = document.getElementById("signer_twitter_" + i.toString()).value;
-    var amount = document.getElementById("signer_amount_" + i.toString()).value;
+    var address = document.getElementById("signer_eth_addr_" + (i+1).toString()).value;
+    var twitter = document.getElementById("signer_twitter_" + (i+1).toString()).value;
+    var amount = document.getElementById("signer_amount_" + (i+1).toString()).value;
 
     if (address !== null && address !== "") {
       signer_addresses.push(address)
