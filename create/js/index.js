@@ -171,7 +171,7 @@ async function fetchAccountData() {
       html += '</div></div>'
       document.getElementById("nft-form").innerHTML = html
 
-      window.contract = loadContract(web3);
+      // window.contract = loadContract(web3);
       window.wrapped_nft = wrapped_nft;
       
     } else {
@@ -254,7 +254,8 @@ async function mintNFT() {
           let hash = this.response;
 
           // file uploaded, now we can set that as the tokenURI
-          var safeMint = window.contract.methods.safeMint("ipfs://" + hash, signer_addresses, addresses_values, signer_twitters, twitter_values, wrapped_nft.asset_contract.address, wrapped_nft.token_id);
+          let contract = loadContract(web3)
+          var safeMint = contract.methods.safeMint("ipfs://" + hash, signer_addresses, addresses_values, signer_twitters, twitter_values, wrapped_nft.asset_contract.address, wrapped_nft.token_id);
           
           // Chain ID of Ropsten Test Net is 3, replace it to 1 for Main Net
           var chainId = 3;
