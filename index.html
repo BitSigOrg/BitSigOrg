@@ -38,9 +38,9 @@
 </head>
 <body>  
 
-  <div class="row mx-auto" style="background-color: rgba(255, 99, 71, 0); height: 9%;">
+  <div class="row mx-auto" style="background-color: rgba(0, 0, 0, 0); height: 9%;">
     <div class="col-md-auto brand-logo mx-auto my-auto" >
-      <a href="" id="logo-container"><img src="img/Logo.png" alt=""/></a>
+      <a href="" id="logo-container"><img src="img/Logo2.png" alt=""/></a>
     </div>
     <div class="col-lg-6 h-100 text-center mx-auto my-auto" id="social-big">
       <ul class="list-inline mb-0">
@@ -49,7 +49,7 @@
             <i class="fab fa-twitter-square fa-2x fa-fw"></i>
           </a>
         </li>
-        <li class="list-inline-item">
+   <!--      <li class="list-inline-item">
           <a href="https://discord.gg/aZVxzaRaPZ">
             <i class="fab fa-discord fa-2x fa-fw"></i>
           </a>
@@ -58,7 +58,7 @@
           <a href="https://medium.com/@bitsig">
             <i class="fab fa-medium fa-2x fa-fw"></i>
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -68,33 +68,28 @@
       <div class="container">
         <div class="row mx-auto">
             <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
-                <p class="qr_text_highlighted">Sign the first signable NFT for free!</p>
-                <p class="qr_text">70% of the money goes to its signers.</p>
-                <p class="qr_text">Every time the NFT is sold. Forever.</p>
+                <p class="qr_text_highlighted">Get your NFTs signed!</p>
+                <p class="qr_text">Link a signable NFT with one you own.</p>
+                <p class="qr_text">Get it signed by whoever you want.</p>
             </div>
             <div class="col-lg-6 col-md-6 text-center my-auto mx-auto" id="qr_wrapper">
-                <img src="img/qr_fire_13.png" id="qr"/>
+                <img src="img/signature3.png" id="qr"/>
             </div>
         </div>
       </div>
     </section>
 
-    <section>
+    <section id="button-section">
       <div class="container">
-        <div class="row mx-auto mb-3 mt-4">
-          <div class="col-lg-6 col-md-6 text-center my-auto mx-auto">
-            <a href="signers/index.html"><p class="signers_text">See who's signed it <i class="fas fa-angle-right"></i></p></a>
-          </div>
-        </div>
-        <div class="row mx-auto mb-1 mt-4">
+        <div class="row mx-auto mb-1 mt-2">
           <div class="col-lg-6 col-md-6 my-auto" id="app-beta-container">
-            <button id="app-beta">Sign with Beta App</button>
+            <button id="app-beta">Sign an NFT</button>
           </div>
     <!--       <div class="col-lg-8 col-md-8 text-left my-auto mx-auto">
             <p class="skip_text">Skip the waitlist with the code "first1000".</p>
           </div> -->
           <div class="col-lg-6 col-md-6 my-auto mx-auto" id="btn-connect-container">
-            <button class="connect_wallet" id="btn-connect">Sign with Wallet</button>
+            <a href="profile/index.html"><button class="my_nfts">My NFTs</button></a>
           </div>
           <div class="col-lg-6 col-md-6 my-auto mx-auto" id="sign-button-container">
             <button id="sign_button">Continue Signing</button>
@@ -110,27 +105,6 @@
             <p><strong id="blockchain_status">Connected blockchain:</strong> <span id="network-name"></span></p>
           </div>
         </div>
-
-        <div class="col-lg-6 h-100 text-center mx-auto my-auto" id="social-mobile">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <a href="https://twitter.com/bitsigofficial">
-                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://discord.gg/aZVxzaRaPZ">
-                <i class="fab fa-discord fa-2x fa-fw"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://medium.com/@bitsig">
-                <i class="fab fa-medium fa-2x fa-fw"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-
       </div>
     </section>
 
@@ -144,109 +118,14 @@
       </div>
     </section> -->
 
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-1">
-            <div class="col-lg-10 col-md-10 my-auto mx-auto" style="background-color: rgb(200, 200, 200); height: 1px;"></div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">What's an NFT?</p>
-                <p class="desc_text">An NFT is a "Non-fungible Token"... a unique crypto token that can't be duplicated. It's basically a public <strong>certificate of ownership on a blockchain.</strong></p>
-                <br/>
-                <p class="desc_text">You may have heard of them on the news with some selling for tens of millions of dollars or of Twitter's founder making and selling an NFT of his first tweet.</p>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">What's BitSig?</p>
-                <p class="desc_text">BitSig enables new types of NFTs that can be signed for free. <strong>Digital objects are now signable, just like physical ones.</strong></p>
-                <br/>
-                <p class="desc_text">If someone important signs your NFT, it becomes more valuable just like a soccer ball does when your favorite soccer player signs it.</p>
-                <br/>
-                <p class="desc_text">If you sign someone else's NFT, you can get a percentage of the NFT's sale, every time it's sold.</p>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">Community</p>
-                <p class="desc_text">Ultimately, what gives an NFT value is its community. BitSig makes the connection between a token and its community explicit. <strong>The more signatures a token has, the more valuable it is to the community.</strong></p>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">How do I sign an NFT?</p>
-                <p class="desc_text">Signing an NFT with BitSig is very easy (and free), even your grandma could do it! <strong>Simply scan the QR code of the token with the app</strong> and it automatically signs it.</p>
-                <br/>
-                <p class="desc_text">If you don't have the app, you can connect your wallet and sign it here.</p>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">If you're a fan...</p>
-                <p class="desc_text">Create fan art for your favorite artist to sign for free. The NFT with your art gets valuable when your favorite artist signs it. If you choose to sell it, you can <strong>support the artist by giving them a royalty</strong>.</p>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">If you're an artist/creator...</p>
-                <p class="desc_text">Connect with your fans by creating an NFT for them to sign. When you sell the NFT to a super fan, you can <strong>give back to the community of fans that supported you with a signers royalty</strong>.</p>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">If you're a conducting business...</p>
-                <p class="desc_text">Create an NFT of a contract and easily have it signed by all parties involved. The signatures will be on the NFT forever, <strong>even if BitSig.org shuts down.</strong></p>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
+    <section id="description-section">
+      <div class="container" >
+        <div class="row mx-auto mb-1 mt-2">
+            <div class="col-lg-8 col-md-8 text-left my-auto mx-auto">
                 <p class="desc_text_highlighted">How does it work?</p>
-                <p class="desc_text">When signing a token, the BitSig app (or your wallet) signs a message under the format:</p><p class="desc_text" style="color: rgb(120, 120, 120)">"contractAddress=address&tokenId=ID&<br/>timestamp=timestamp",</p><p class="desc_text">which is a unique identifier of the token. The message, digital signature, and your public key are added to a file holding all of the signatures so that anyone can verify them. <a href="https://etherscan.io/verifySig">https://etherscan.io/verifySig</a></p>
+                <p class="desc_text">Mint a new "signable" BitSig NFT. If you own an existing NFT, connect it! Only the token owner can connect it.</p>
                 <br/>
-                <p class="desc_text">The file that has all of the signatures is stored on ipfs. When more signers sign, a new file is created that includes the new signers. The new file has a link that points back to the previous file. BitSig creates the files and keeps track of the link to the latest file. The token itself can also hold the link to the latest file. By continuously setting the latest link in the token, a history of the signer files is held in the blockchain,  which ensures the validity of the chain of files. </p>
-                <br/>
-                <p class="desc_text">On-chain signatures are also supported. These are signatures that are directly on the token. This type of signature, however, will cost gas payable by either the token owner or the signer. If bitsig.org ever goes down, your tokens will continue to be signable.</p>
+                <p class="desc_text">Select who you want to have it signed by. Add as much money as you want that'll go to the signer when they sign it. If no one signs it, you can withdraw your funds.</p>
             </div>
         </div>
       </div>
@@ -254,14 +133,29 @@
 
     <section>
       <div class="container">
-        <div class="row mx-auto mb-1 mt-4">
-            <div class="col-lg-6 col-md-6 text-left my-auto mx-auto">
-                <p class="desc_text_highlighted">What's next?</p>
-                <p class="desc_text">The BitSig platform and app are still being built. When they fully launch, you'll be able to create and manage your own signable tokens, create signable tokens that wrap other tokens you own, and buy/sell them.</p>
-            </div>
+        <div class="col-lg-6 h-100 text-center mx-auto my-auto" id="social-mobile">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <a href="https://twitter.com/bitsigofficial">
+                <i class="fab fa-twitter-square fa-2x fa-fw"></i>
+              </a>
+            </li>
+<!--             <li class="list-inline-item">
+              <a href="https://discord.gg/aZVxzaRaPZ">
+                <i class="fab fa-discord fa-2x fa-fw"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="https://medium.com/@bitsig">
+                <i class="fab fa-medium fa-2x fa-fw"></i>
+              </a>
+            </li> -->
+          </ul>
         </div>
       </div>
     </section>
+
+
   </main>
 
   <div id="signUpModal" class="modal">
@@ -350,7 +244,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 h-100 text-center my-auto mx-auto">
-          <p class="text-muted small mb-4 mb-lg-0">&copy; BitSig 2021. All Rights Reserved.</p>
+          <p class="text-muted small mb-2 mb-lg-0">&copy; BitSig 2021. All Rights Reserved.</p>
         </div>
 <!--         <div class="col-lg-6 h-100 text-center my-auto">
           <ul class="list-inline mb-0">

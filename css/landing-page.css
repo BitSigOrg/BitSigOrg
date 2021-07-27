@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background: rgb(244,255,243); background: radial-gradient(circle at center top, rgba(244,255,243,1) 0%, rgba(255,255,255,1) 13%);
+  background: radial-gradient(circle at center top, rgba(4,41,43,1) 0%, rgb(0,0,0) 13%);
 }
 
 h1,
@@ -131,20 +131,20 @@ h6 {
   font-weight: bold;
   font-size: 20px;
   color: white;
-  background-color: #00a66c;
+  background-color: #17fdff;
 }
 
 .modal-button:active {
   outline:0;
   background-color: #009964;
-  -webkit-box-shadow: 0px 0px 17px 1px #00a66c; 
-  box-shadow: 0px 0px 17px 1px #00a66c;
+  -webkit-box-shadow: 0px 0px 17px 1px #17fdff; 
+  box-shadow: 0px 0px 17px 1px #17fdff;
 }
 
 .modal-button:hover {
   outline:0;
-  -webkit-box-shadow: 0px 0px 20px 1px #00a66c; 
-  box-shadow: 0px 0px 20px 1px #00a66c;
+  -webkit-box-shadow: 0px 0px 20px 1px #17fdff; 
+  box-shadow: 0px 0px 20px 1px #17fdff;
 }
 
 /* Modal Content */
@@ -263,7 +263,7 @@ h6 {
 #close-beta {
   background-color: white;
   border-style: none;
-  color: #00a66c;
+  color: #17fdff;
   margin-top: 40px;
 }
 
@@ -349,7 +349,7 @@ h6 {
   padding: 20px;
   font-weight: bold;
   font-size: 16px;
-  color: #00a66c;
+  color: #17fdff;
   background-color: white;
 }
 
@@ -384,7 +384,7 @@ h6 {
   font-weight: bold;
   font-size: 20px;
   color: white;
-  background-color: black;
+  background-color: rgb(35,35,35);
 }
 
 #app-beta:focus {
@@ -400,8 +400,8 @@ h6 {
 
 #app-beta:hover {
   outline:0;
-  -webkit-box-shadow: 0px 0px 10px 1px black; 
-  box-shadow: 0px 0px 10px 1px black;
+  -webkit-box-shadow: 0px 0px 10px 1px rgb(40,40,40);
+  box-shadow: 0px 0px 10px 1px rgb(40,40,40);
 }
 
 #sign_button {
@@ -413,7 +413,7 @@ h6 {
   font-weight: bold;
   font-size: 20px;
   color: white;
-  background-color: #00a66c;
+  background-color: #17fdff;
 }
 
 #sign_button:focus {
@@ -423,14 +423,14 @@ h6 {
 #sign_button:active {
   outline:0;
   background-color: #009964;
-  -webkit-box-shadow: 0px 0px 17px 1px #00a66c; 
-  box-shadow: 0px 0px 17px 1px #00a66c;
+  -webkit-box-shadow: 0px 0px 17px 1px #17fdff; 
+  box-shadow: 0px 0px 17px 1px #17fdff;
 }
 
 #sign_button:hover {
   outline:0;
-  -webkit-box-shadow: 0px 0px 20px 1px #00a66c; 
-  box-shadow: 0px 0px 20px 1px #00a66c;
+  -webkit-box-shadow: 0px 0px 20px 1px #17fdff; 
+  box-shadow: 0px 0px 20px 1px #17fdff;
 }
 
 .disconnect_wallet {
@@ -457,7 +457,7 @@ h6 {
   color: rgb(100,100,100);
 }
 
-.connect_wallet {
+.my_nfts {
   border-width: 0;
   border-radius: 10px;
   padding: 20px;
@@ -467,18 +467,18 @@ h6 {
   width: 220px;
 }
 
-.connect_wallet:focus {
+.my_nfts:focus {
   outline:0;
 }
 
-.connect_wallet:active {
+.my_nfts:active {
   outline:0;
   background-color: rgb(230,230,230);
   -webkit-box-shadow: 0px 0px 17px 1px rgb(210,210,210);
   box-shadow: 0px 0px 17px 1px rgb(210,210,210);
 }
 
-.connect_wallet:hover {
+.my_nfts:hover {
   outline:0;
   -webkit-box-shadow: 0px 0px 20px 1px rgb(210,210,210);
   box-shadow: 0px 0px 20px 1px rgb(210,210,210);
@@ -488,7 +488,7 @@ h6 {
   font-family:avenir;
   font-size: 15px;
   font-weight: bold;
-  color: #27bd82;
+  color: #17fdff;
   text-align: center;
 }
 
@@ -496,6 +496,7 @@ h6 {
   font-family:avenir;
   font-size: 15px;
   font-weight: bold;
+  color: #FFF;
   text-align: center;
 }
 
@@ -517,16 +518,26 @@ a:link{
 }
 
 .desc_text_highlighted {
-  font-family:sans-serif;
+  font-family:avenir;
   font-size: 15px;
   font-weight: bold;
-  color: #27bd82;
+  /*color: #17fdff;*/
+  color: #FFF;
 }
 
 .desc_text {
-  font-family:sans-serif;
+  font-family:avenir;
   font-size: 15px;
+  color: #FFF;
   /*font-weight: bold;*/
+}
+
+#description_section {
+   margin-top: 0px;
+}
+
+#button-section {
+  margin-top: 0px;
 }
 
 @media (min-width: 768px) {
@@ -549,12 +560,21 @@ a:link{
   }
 
   .desc_text_highlighted {
-    font-size: 18px;
+    font-size: 25px;
   }
 
   .desc_text {
-    font-size: 18px;
+    font-size: 20px;
   }
+
+  #description-section {
+     margin-top: 60px;
+  }
+
+  #button-section {
+    margin-top: 30px;
+  }
+
 }
 
 @media (min-width: 1000px) {
@@ -575,24 +595,16 @@ a:link{
   .signers_text {
     font-size: 18px;
   }
-
-  .desc_text_highlighted {
-    font-size: 18px;
-  }
-
-  .desc_text {
-    font-size: 18px;
-  }
 }
 
 @media (min-width: 1300px) {
   .qr_text_highlighted {
-    font-size: 25px;
+    font-size: 27px;
     text-align: right;
   }
 
   .qr_text {
-    font-size: 25px;
+    font-size: 27px;
     text-align: right;
   }
 
@@ -602,14 +614,6 @@ a:link{
 
   .signers_text {
     font-size: 20px;
-  }
-
-  .desc_text_highlighted {
-    font-size: 18px;
-  }
-
-  .desc_text {
-    font-size: 18px;
   }
 }
 
@@ -734,7 +738,7 @@ header.masthead {
   margin-top: 1rem;
   padding-top: 1rem;
   padding-bottom: 2rem;
-  background-color: #00a66c;
+  background-color: #17fdff;
   color: white;
 }
 
@@ -756,7 +760,7 @@ header.masthead h1 {
 
 .line {
   width: 100%;
-  border-bottom: 4px solid #00a66c;
+  border-bottom: 4px solid #17fdff;
   position: relative;
 }
 
@@ -767,14 +771,14 @@ header.masthead h1 {
 
   .line {
     width: 770px;
-    border-bottom: 4px solid #00a66c;
+    border-bottom: 4px solid #17fdff;
     position: absolute;
     margin: 0 12%;
   }
 }
 
 .fab {
-  color: #00a66c
+  color: #17fdff
 }
 
 #social-mobile {
@@ -796,7 +800,7 @@ header.masthead h1 {
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    background-color: #27bd82 !important;
+    background-color: #17fdff !important;
     border-width: 0;
     color: #FFFFFF;
     border-radius: 10px;
@@ -828,24 +832,6 @@ header.masthead h1 {
 
 .features-icons .features-icons-item:hover .features-icons-icon i {
   font-size: 5rem;
-}
-
-.acquaintances, .acquaintances:hover, .acquaintances:active, .acquaintances:visited {
-    background-color: #00a66c !important;
-    border-width: 1px;
-    border-color: #FFFFFF;
-    color: #FFFFFF;
-    font-size: 1rem;
-}
-
-@media (min-width: 1000px) {
-  .acquaintances, .acquaintances:hover, .acquaintances:active, .acquaintances:visited {
-      background-color: #00a66c !important;
-      border-width: 1px;
-      border-color: #FFFFFF;
-      color: #FFFFFF;
-      font-size: 1.3rem;
-  }
 }
 
 .screenshot {

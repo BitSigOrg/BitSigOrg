@@ -113,6 +113,42 @@ async function fetchAccountData() {
   selectedAccount = accounts[0];
   ethaddress = selectedAccount;
 
+  console.log(selectedAccount);
+
+  // have base message
+  // sign base message
+  // add prefix to base message to create message
+  // use message and ignore base message from now on
+
+  const baseMessage = web3.utils.soliditySha3({ type: 'address', value: '0x24f8ceE97aDCc6879b44A5BebfE92167fB1b27F4' },{ type: 'uint256', value: '1' });
+  const message = web3.utils.soliditySha3({ type: 'string', value: '\x19Ethereum Signed Message:\n32' },{ type: 'bytes32', value: baseMessage });
+  var signature = await web3.eth.personal.sign(baseMessage, accounts[0]);
+
+
+  console.log("--start--")
+  console.log(message);
+
+  console.log(signature);
+  signature = signature.slice(2);
+  
+  var r = signature.slice(0, 64); var s = signature.slice(64, 128); var v = signature.slice(128);
+  console.log(parseInt(v, 16));
+  console.log("0x" + r);
+  console.log("0x" + s);
+
+
+  console.log("--end--")
+  // var r = signatureHexString.substr(0,64)
+  // var s = signatureHexString.substr(64,128)
+  // var v = signatureHexString.substr(128,130)
+  // console.log(signature)
+  // console.log(web3.utils.padRight(web3.utils.fromAscii(r), 34))
+  // console.log(web3.utils.padRight(web3.utils.fromAscii(s), 34))
+  // console.log(v)
+  // console.log(r)
+  // console.log(s)
+
+
   // document.querySelector("#selected-account").textContent = selectedAccount;
 
   // Get a handle
@@ -363,32 +399,6 @@ function joinBeta() {
   }
 }
 
-/**
- * Fetch account data for UI when
- * - User switches accounts in wallet
- * - User switches networks in wallet
- * - User connects wallet initially
- */
-async function refreshAccountData() {
-
-  // If any current data is displayed when
-  // the user is switching acounts in the wallet
-  // immediate hide this data
-  document.querySelector("#btn-disconnect").style.display = "none";
-  document.querySelector("#btn-connect-container").style.display = "inline";
-  document.querySelector("#blockchain_status").style.display = "none";
-  document.querySelector("#sign_button").style.display = "none";
-  document.querySelector("#blockchain_status").style.display = "none";
-
-  // Disable button while UI is loading.
-  // fetchAccountData() will take a while as it communicates
-  // with Ethereum node via JSON-RPC and loads chain data
-  // over an API call.
-  document.querySelector("#btn-connect").setAttribute("disabled", "disabled")
-  await fetchAccountData(provider);
-  document.querySelector("#btn-connect").removeAttribute("disabled")
-}
-
 
 /**
  * Connect wallet button pressed.
@@ -444,11 +454,7 @@ async function onDisconnect() {
 
   selectedAccount = null;
 
-  // Set the UI back to the initial state
-  document.querySelector("#btn-connect-container").style.display = "inline";
-  document.querySelector("#btn-disconnect").style.display = "none";
-  document.querySelector("#blockchain_status").style.display = "none";
-  document.querySelector("#sign_button").style.display = "none";
+
 }
 
 
@@ -456,17 +462,7 @@ async function onDisconnect() {
  * Main entry point.
  */
 window.addEventListener('load', async () => {
-  init();
-  document.querySelector("#btn-connect").addEventListener("click", onConnect);
-  document.querySelector("#btn-disconnect").addEventListener("click", onDisconnect);
-  document.querySelector("#sign_button").addEventListener("click", sign);
-  document.querySelector("#modal-continue").addEventListener("click", signIn);
-  document.querySelector("#google-button").addEventListener("click", googleSignin);
-  document.querySelector("#finish-signing").addEventListener("click", finishSigning);
-  document.querySelector("#connect-twitter").addEventListener("click", connectToTwitter);
-  document.querySelector("#app-beta").addEventListener("click", showAppBeta);
-  document.querySelector("#close-beta").addEventListener("click", closeBeta);
-  document.querySelector("#join-beta").addEventListener("click", joinBeta);
+  // init();
 
   var modal = document.getElementById("signUpModal");
 
