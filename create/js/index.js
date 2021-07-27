@@ -154,7 +154,7 @@ async function fetchAccountData() {
       if(nft.description != null && nft.description != "") {
         html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Description: </strong>' + nft.description + '</p></div>'
       }
-      html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Wrapped NFT: <a href="https://rinkeby-api.opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '" target="_blank"></strong>https://rinkeby-api.opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '</a></p></div>'
+      html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Wrapped NFT: <a href="https://opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '" target="_blank"></strong>https://opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '</a></p></div>'
       
       html += '<div class="text-center my-auto" style="padding-top: 30px;"><p><strong>Request Signatures</strong></p></div>'
 
@@ -210,9 +210,9 @@ async function mintNFT() {
   var totalAmount = 0;
 
   for (var i=0; i<num_signers; i++) {
-    var address = document.getElementById("signer_eth_addr_" + i.toString());
-    var twitter = document.getElementById("signer_twitter_" + i.toString());
-    var amount = document.getElementById("signer_amount_" + i.toString());
+    var address = document.getElementById("signer_eth_addr_" + i.toString()).value;
+    var twitter = document.getElementById("signer_twitter_" + i.toString()).value;
+    var amount = document.getElementById("signer_amount_" + i.toString()).value;
 
     if (address !== null && address !== "") {
       signer_addresses.push(address)
