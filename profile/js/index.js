@@ -124,7 +124,8 @@ async function fetchAccountData() {
 
   console.log(selectedAccount);
 
-  let opensea_api = "https://api.opensea.io/api/v1/assets?owner=0x409062a018E3355f158f0D13dF222E161Df92d79"
+  // let opensea_api = "https://api.opensea.io/api/v1/assets?owner=0x409062a018E3355f158f0D13dF222E161Df92d79"
+  let opensea_api = "https://rinkeby-api.opensea.io/api/v1/assets?owner=0x409062a018E3355f158f0D13dF222E161Df92d79"
   var request = new XMLHttpRequest()
   request.open('GET', opensea_api, true)
   request.onload = function () {
