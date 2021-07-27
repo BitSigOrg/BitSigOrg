@@ -255,7 +255,10 @@ async function mintNFT() {
 
           // file uploaded, now we can set that as the tokenURI
           var safeMint = window.contract.methods.safeMint("ipfs://" + hash, signer_addresses, addresses_values, signer_twitters, twitter_values, wrapped_nft.asset_contract.address, wrapped_nft.token_id);
-          web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: web3.toWei(totalAmount, "ether"), data: safeMint})
+          
+          // Chain ID of Ropsten Test Net is 3, replace it to 1 for Main Net
+          var chainId = 3;
+          web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: web3.toWei(totalAmount, "ether"), data: safeMint, "chainId": chainId})
           .on('transactionHash', function(hash){
             console.log("hash")
             console.log(hash)
