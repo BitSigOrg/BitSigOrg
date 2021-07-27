@@ -259,7 +259,7 @@ async function mintNFT() {
           
           // Chain ID of Ropsten Test Net is 3, replace it to 1 for Main Net
           var chainId = 3;
-          web3.eth.sendTransaction({to: bitsig_contract_address, from: account, data: safeMint, "chainId": chainId})
+          web3.eth.sendTransaction({to: bitsig_contract_address, from: account, "chainId": chainId})
           .on('transactionHash', function(hash){
             console.log("hash")
             console.log(hash)
