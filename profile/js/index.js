@@ -145,6 +145,9 @@ async function fetchAccountData() {
         if(nft.name != null && nft.name != "") {
           html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>' + nft.asset_contract.name + ': </strong>' + nft.name + '</p></div>'
         }
+        if(nft.token_id != null && nft.token_id != "") {
+          html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>Token ID: </strong>' + nft.token_id + '</p></div>'
+        }
         html += '<div class="text-center my-auto"><a style="text-decoration:none" target="_blank" href="' + nft.permalink + '"><p>View on OpenSea</p><a/></div>'
         html += '<a href="' + create_url + '"><div class="text-center my-auto" style="padding-top: 20px;"><button class="make_signable">Make Signable</button></a></div>'
         html += '</div></div>'
