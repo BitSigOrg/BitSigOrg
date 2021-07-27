@@ -132,7 +132,7 @@ async function fetchAccountData() {
   let contract_address = params.get('contract_address');
   let token_id = params.get('token_id');
 
-  let opensea_api = "https://api.opensea.io/api/v1/assets?asset_contract_addresses=" + contract_address + "&token_ids=" + token_id;
+  let opensea_api = "https://rinkeby-api.opensea.io/api/v1/assets?asset_contract_addresses=" + contract_address + "&token_ids=" + token_id;
   var request = new XMLHttpRequest()
   request.open('GET', opensea_api, true)
   request.onload = function () {
@@ -154,7 +154,7 @@ async function fetchAccountData() {
       if(nft.description != null && nft.description != "") {
         html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Description: </strong>' + nft.description + '</p></div>'
       }
-      html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Wrapped NFT: <a href="https://opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '" target="_blank"></strong>https://opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '</a></p></div>'
+      html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Wrapped NFT: <a href="https://rinkeby-api.opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '" target="_blank"></strong>https://rinkeby-api.opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '</a></p></div>'
       
       html += '<div class="text-center my-auto" style="padding-top: 30px;"><p><strong>Request Signatures</strong></p></div>'
 
