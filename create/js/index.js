@@ -38,7 +38,7 @@ var signedMessage;
 var firebaseUID = "";
 var twitterUsername = "";
 
-let bitsig_contract_address = "0x983fD6909F2eb2CE7e30De18C5B882fA78952B09"
+let bitsig_contract_address = "0xa4201FCbb1D90AdfAF67B2632b8236B39D3c49f3"
 
 
 /**
@@ -273,11 +273,11 @@ async function mintNFT() {
 
     if (address !== null && address !== "") {
       signer_addresses.push(address)
-      addresses_values.push(web3.utils.toWei(amount.toString(), "ether"));
+      addresses_values.push(parseInt(web3.utils.toWei(amount.toString(), "ether")));
     }
     else if (twitter !== null && twitter !== "") {
       signer_twitters.push(twitter)
-      twitter_values.push(web3.utils.toWei(amount.toString(), "ether"));
+      twitter_values.push(parseInt(web3.utils.toWei(amount.toString(), "ether")));
     }
     totalAmount += parseFloat(amount);
   }
