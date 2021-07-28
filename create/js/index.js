@@ -69,6 +69,7 @@ async function init() {
   // if (web3Modal.cachedProvider) {
   //   onConnect();
   // }
+  console.log("test")
   if (localStorage.getItem("walletProvider") !== null && localStorage.getItem("walletProvider") !== "") {
     console.log(localStorage.getItem("walletProvider"))
     provider = JSON.parse(localStorage.getItem("walletProvider"));
@@ -383,6 +384,9 @@ async function onConnect() {
 
   provider.on("connect", (chainId) => {
     localStorage.setItem("walletProvider", JSON.stringify(provider));
+    console.log(provider)
+    console.log(JSON.stringify(provider))
+    console.log(localStorage.getItem("walletProvider"))
   });
 
   provider.on("disconnect", (code, message) => {
