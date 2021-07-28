@@ -27,6 +27,7 @@ let web3Modal
 // Chosen wallet provider given by the dialog window
 let provider;
 
+let bitsig_contract_address = "0xa4201FCbb1D90AdfAF67B2632b8236B39D3c49f3"
 
 // Address of the selected account
 let selectedAccount;
@@ -112,27 +113,64 @@ async function fetchAccountData() {
     if (request.status >= 200 && request.status < 400) {
       assets = data.assets
       console.log(assets)
-      document.getElementById("nfts").innerHTML = '<div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p class="desc_text_highlighted">My NFTs</p></div>'
+
+      document.getElementById("nfts").innerHTML = '<div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p class="desc_text_highlighted">My BitSig NFTs</p></div>'
+      var has_bitsig_nft = false
       assets.forEach((nft) => {
-        let create_url = '../create/index.html?contract_address=' + nft.asset_contract.address + '&token_id=' + nft.token_id
+        if (nft.asset_contract.address.toLowerCase() === bitsig_contract_address.toLowerCase()) {
+          has_bitsig_nft = true
+          let token_url = '../token/index.html?contract_address=' + nft.asset_contract.address + '&token_id=' + nft.token_id
 
-        var html = '<div class="row mx-auto mb-1 mt-4">'
-        html += '<div class="nft col-lg-5 col-md-5 text-center my-auto mx-auto">'
-        if (nft.image_original_url != null) {
-          html += '<div class="text-center my-auto"><img class="nft-image" src="' + nft.image_original_url + '"/></div>'
+          var html = '<div class="row mx-auto mb-1 mt-4">'
+          html += '<div class="nft col-lg-5 col-md-5 text-center my-auto mx-auto">'
+          if (nft.image_original_url != null) {
+            html += '<div class="text-center my-auto"><img class="nft-image" src="' + nft.image_original_url + '"/></div>'
+          }
+          if(nft.name != null && nft.name != "") {
+            html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>' + nft.asset_contract.name + ': </strong>' + nft.name + '</p></div>'
+          }
+          if(nft.token_id != null && nft.token_id != "") {
+            html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>Token ID: </strong>' + nft.token_id + '</p></div>'
+          }
+          html += '<div class="text-center my-auto"><a style="text-decoration:none" target="_blank" href="' + nft.permalink + '"><p>View on OpenSea</p><a/></div>'
+          html += '<a href="' + token_url + '"><div class="text-center my-auto" style="padding-top: 20px;"><button class="make_signable">View Token</button></a></div>'
+          html += '</div></div>'
+          document.getElementById("nfts").innerHTML += html
         }
-        if(nft.name != null && nft.name != "") {
-          html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>' + nft.asset_contract.name + ': </strong>' + nft.name + '</p></div>'
-        }
-        if(nft.token_id != null && nft.token_id != "") {
-          html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>Token ID: </strong>' + nft.token_id + '</p></div>'
-        }
-        html += '<div class="text-center my-auto"><a style="text-decoration:none" target="_blank" href="' + nft.permalink + '"><p>View on OpenSea</p><a/></div>'
-        html += '<a href="' + create_url + '"><div class="text-center my-auto" style="padding-top: 20px;"><button class="make_signable">Make Signable</button></a></div>'
-        html += '</div></div>'
-        document.getElementById("nfts").innerHTML += html
-
       })
+
+      if (has_bitsig_nft) {
+        document.getElementById("nfts").innerHTML += "<div style='height:35px;'></div>"
+        document.getElementById("nfts").innerHTML += '<div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p class="desc_text_highlighted">My Other NFTs</p></div>'
+      }
+      else {
+        document.getElementById("nfts").innerHTML += '<div class="col-lg-6 col-md-6 text-center my-auto mx-auto"><p class="desc_text_highlighted">My NFTs</p></div>'
+      }
+      
+      assets.forEach((nft) => {
+        if (nft.asset_contract.address.toLowerCase() != bitsig_contract_address.toLowerCase()) {
+          let create_url = '../create/index.html?contract_address=' + nft.asset_contract.address + '&token_id=' + nft.token_id
+          let token_url = '../token/index.html?contract_address=' + nft.asset_contract.address + '&token_id=' + nft.token_id
+
+          var html = '<div class="row mx-auto mb-1 mt-4">'
+          html += '<div class="nft col-lg-5 col-md-5 text-center my-auto mx-auto">'
+          if (nft.image_original_url != null) {
+            html += '<div class="text-center my-auto"><img class="nft-image" src="' + nft.image_original_url + '"/></div>'
+          }
+          if(nft.name != null && nft.name != "") {
+            html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>' + nft.asset_contract.name + ': </strong>' + nft.name + '</p></div>'
+          }
+          if(nft.token_id != null && nft.token_id != "") {
+            html += '<div class="text-center my-auto" style="padding-top: 0px;"><p><strong>Token ID: </strong>' + nft.token_id + '</p></div>'
+          }
+          html += '<div class="text-center my-auto"><a style="text-decoration:none" target="_blank" href="' + nft.permalink + '"><p>View on OpenSea</p><a/></div>'
+          html += '<a href="' + create_url + '"><div class="text-center my-auto" style="padding-top: 20px;"><button class="make_signable">Make Signable</button></a></div>'
+          html += '<a href="' + token_url + '"><div class="text-center my-auto" style="padding-top: 20px;"><button class="make_signable">View Token</button></a></div>'
+          html += '</div></div>'
+          document.getElementById("nfts").innerHTML += html
+        }
+      })
+
     } else {
       console.log('error')
     }

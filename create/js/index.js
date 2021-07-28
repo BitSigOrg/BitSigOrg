@@ -219,7 +219,7 @@ async function fetchAccountData() {
       if(nft.description != null && nft.description != "") {
         html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Description: </strong>' + nft.description + '</p></div>'
       }
-      html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Wrapped NFT: <a href="https://opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '" target="_blank"></strong>https://opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '</a></p></div>'
+      html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Wrapped NFT: <a href="https://testnets.opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '" target="_blank"></strong>https://opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '</a></p></div>'
       
       html += '<div class="text-center my-auto" style="padding-top: 30px;"><p><strong>Request Signatures</strong></p></div>'
 
@@ -310,11 +310,14 @@ async function mintNFT() {
         metadata.external_url = "https://bitsig.org/token?contract_address=" + bitsig_contract_address + "&token_id=" + token_id
 
         if (metadata.name !== null && metadata.name !== "") {
-          metadata.name = metadata.name + " | Signed"
+          metadata.name = metadata.name + " | Signable"
         }
         else {
           metadata.name = "Signed Token"
         }
+
+        metadata["wrapped_nft_contract"] = wrapped_nft.asset_contract.address;
+        metadata["wrapped_nft_token_id"] = wrapped_nft.token_id;
 
         let upload_name = bitsig_contract_address + "_" + token_id + ".json"
 
