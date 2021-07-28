@@ -129,9 +129,9 @@ async function fetchAccountData() {
   console.log(selectedAccount);
 
   localStorage.setItem("test", "ttttt");
-  localStorage.setItem("walletProvider", JSON.simpleStringify(provider));
+  localStorage.setItem("walletProvider", simpleStringify(provider));
   console.log("provider", provider)
-  console.log("provider string", JSON.simpleStringify(provider))
+  console.log("provider string", simpleStringify(provider))
   console.log("provider storage", localStorage.getItem("walletProvider"))
 
 
