@@ -273,11 +273,11 @@ async function mintNFT() {
 
     if (address !== null && address !== "") {
       signer_addresses.push(address)
-      addresses_values.push(parseInt(web3.utils.toWei(amount.toString(), "ether")));
+      addresses_values.push(web3.utils.toWei(amount.toString(), "ether"));
     }
     else if (twitter !== null && twitter !== "") {
       signer_twitters.push(twitter)
-      twitter_values.push(parseInt(web3.utils.toWei(amount.toString(), "ether")));
+      twitter_values.push(web3.utils.toWei(amount.toString(), "ether"));
     }
     totalAmount += parseFloat(amount);
   }
