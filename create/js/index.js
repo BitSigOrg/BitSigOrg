@@ -128,6 +128,63 @@ async function fetchAccountData() {
 
   console.log(selectedAccount);
 
+  console.log("----") 
+  // https://cryptobook.nakov.com/crypto-libraries-for-developers/javascript-crypto-libraries prob the best
+
+  /*
+
+    let elliptic = require('elliptic');
+    let sha3 = require('js-sha3');
+    let ec = new elliptic.ec('secp256k1');
+
+    // let keyPair = ec.genKeyPair(); // Generate random keys
+    let keyPair = ec.keyFromPrivate(
+    "97ddae0f3a25b92268175400149d65d6887b9cefaf28ea2c078e05cdc15a3c0a");
+    let privKey = keyPair.getPrivate("hex");
+    let pubKey = keyPair.getPublic();
+    console.log(`Private key: ${privKey}`);
+    console.log("Public key :", pubKey.encode("hex").substr(2));
+    console.log("Public key (compressed):",
+    pubKey.encodeCompressed("hex"));
+
+    // sign message
+    let msg = 'Message for signing';
+    let msgHash = sha3.keccak256(msg);
+    let signature = 
+      ec.sign(msgHash, privKey, "hex", {canonical: true});
+
+    console.log(`Msg: ${msg}`);
+    console.log(`Msg hash: ${msgHash}`);
+    console.log("Signature:", signature);
+
+    // verify message
+    let hexToDecimal = (x) => ec.keyFromPrivate(x, "hex")
+      .getPrivate().toString(10);
+    let pubKeyRecovered = ec.recoverPubKey(
+      hexToDecimal(msgHash), signature,
+      signature.recoveryParam, "hex");
+    console.log("Recovered pubKey:",
+      pubKeyRecovered.encodeCompressed("hex"));
+    let validSig = ec.verify(
+      msgHash, signature, pubKeyRecovered);
+    console.log("Signature valid?", validSig);
+
+    // also unrelated but just cuz of the v r s
+    const message = web3.sha3('Hello World');
+    const signature = await web3.eth.sign(account, message);
+    const { v, r, s } = ethUtil.fromRpcSig(signature);
+  */
+
+  // https://ethereum.stackexchange.com/questions/71565/verifying-modular-exponentiation-operation-in-etherum/71590#71590
+  // RSA verification in solidity
+
+  // var signature = await web3.eth.personal.sign("Sign message to sign in", selectedAccount);
+  // var Bits = 1024; 
+  // console.log(signature)
+  // var RSAkey = cryptico.generateRSAKey(signature, Bits);
+  // var PublicKeyString = cryptico.publicKeyString(RSAkey);      
+  // console.log(PublicKeyString);
+
   const params = (new URL(document.location)).searchParams;
   let contract_address = params.get('contract_address');
   let token_id = params.get('token_id');
@@ -266,7 +323,12 @@ async function mintNFT() {
 
           // Chain ID of Ropsten Test Net is 3, replace it to 1 for Main Net
           var chainId = 3;
-          web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: web3.utils.toWei(totalAmount.toString(), "ether"), data: safeMint, "chainId": chainId})
+          console.log("value to send")
+          console.log(totalAmount.toString())
+          var inWei = web3.utils.toWei(totalAmount.toString(), "ether")
+          console.log("Wei:")
+          console.log(inWei)
+          web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: inWei, data: safeMint, "chainId": chainId})
           .on('transactionHash', function(hash){
             console.log("hash")
             console.log(hash)
@@ -363,27 +425,23 @@ async function onConnect() {
  */
 async function onDisconnect() {
 
-  console.log("Killing the wallet connection", provider);
+  // console.log("Killing the wallet connection", provider);
 
-  // TODO: Which providers have close method?
-  if(provider.close) {
-    await provider.close();
+  // // TODO: Which providers have close method?
+  // if(provider.close) {
+  //   await provider.close();
 
-    // If the cached provider is not cleared,
-    // WalletConnect will default to the existing session
-    // and does not allow to re-scan the QR code with a new wallet.
-    // Depending on your use case you may want or want not his behavir.
-    await web3Modal.clearCachedProvider();
-    provider = null;
-  }
+  //   // If the cached provider is not cleared,
+  //   // WalletConnect will default to the existing session
+  //   // and does not allow to re-scan the QR code with a new wallet.
+  //   // Depending on your use case you may want or want not his behavir.
+  //   await web3Modal.clearCachedProvider();
+  //   provider = null;
+  // }
+
+  await web3Modal.clearCachedProvider();
 
   selectedAccount = null;
-
-  // Set the UI back to the initial state
-  document.querySelector("#btn-connect-container").style.display = "inline";
-  document.querySelector("#btn-disconnect").style.display = "none";
-  document.querySelector("#blockchain_status").style.display = "none";
-  document.querySelector("#sign_button").style.display = "none";
 }
 
 /**
@@ -391,6 +449,8 @@ async function onDisconnect() {
  */
 window.addEventListener('load', async () => {
   init();
+
+  document.getElementById('disconnect').addEventListener("click", onDisconnect())
 
   var modal = document.getElementById("signUpModal");
 
