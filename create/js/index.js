@@ -111,6 +111,8 @@ async function fetchAccountData() {
 
   console.log(selectedAccount);
 
+  localStorage.setItem("walletProvider", JSON.stringify(provider));
+
   console.log("----") 
   // https://cryptobook.nakov.com/crypto-libraries-for-developers/javascript-crypto-libraries prob the best
 
