@@ -407,6 +407,35 @@ h6 {
   box-shadow: 0px 0px 10px 1px rgb(40,40,40);
 }
 
+#connect {
+  width: 180px;
+  height: 50px;
+  border-width: 0;
+  border-radius: 10px;
+  /*padding: 20px;*/
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(35,35,35);
+  display: none;
+}
+
+#connect:focus {
+  outline:0;
+}
+
+#connect:active {
+  outline:0;
+  background-color: rgb(40,40,40);
+  -webkit-box-shadow: 0px 0px 10px 1px black; 
+  box-shadow: 0px 0px 10px 1px black;
+}
+
+#connect:hover {
+  outline:0;
+  -webkit-box-shadow: 0px 0px 10px 1px rgb(40,40,40);
+  box-shadow: 0px 0px 10px 1px rgb(40,40,40);
+}
 
 
 #make_nft_raw {

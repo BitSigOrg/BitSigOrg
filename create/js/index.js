@@ -41,29 +41,7 @@ var twitterUsername = "";
 let bitsig_contract_address = "0xa4201FCbb1D90AdfAF67B2632b8236B39D3c49f3"
 
 
-/**
- * Setup the orchestra
- */
-function init() {
-
-  console.log("Initializing example");
-  console.log("WalletConnectProvider is", WalletConnectProvider);
-  console.log("Fortmatic is", Fortmatic);
-  console.log("window.web3 is", window.web3, "window.ethereum is", window.ethereum);
-
-  // Check that the web page is run in a secure context,
-  // as otherwise MetaMask won't be available
-  // if(location.protocol !== 'https:') {
-  //   // https://ethereum.stackexchange.com/a/62217/620
-  //   const alert = document.querySelector("#alert-error-https");
-  //   alert.style.display = "block";
-  //   document.querySelector("#btn-connect").setAttribute("disabled", "disabled")
-  //   return;
-  // }
-
-  // Tell Web3modal what providers we have available.
-  // Built-in web browser provider (only one can exist as a time)
-  // like MetaMask, Brave or Opera is added automatically by Web3modal
+async function init() {
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
@@ -82,19 +60,22 @@ function init() {
   };
 
   web3Modal = new Web3Modal({
-    cacheProvider: true, // optional
+    cacheProvider: false, // optional
     providerOptions, // required
     disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+    theme: "dark"
   });
 
-  if (web3Modal.cachedProvider) {
-    console.log("cached")
-    onConnect();
-  }
-  else {
-    onConnect();
+  // if (web3Modal.cachedProvider) {
+  //   onConnect();
+  // }
+  if (localStorage.getItem("walletProvider") !== null) {
+    console.log(localStorage.getItem("walletProvider"))
+    provider = JSON.parse(localStorage.getItem("walletProvider"));
+    console.log(provider)
   }
 
+  document.getElementById("connect").style.display = "inline";
   console.log("Web3Modal instance is", web3Modal);
 }
 
@@ -365,34 +346,21 @@ function createMetadata() {
 }
 
 
-/**
- * Fetch account data for UI when
- * - User switches accounts in wallet
- * - User switches networks in wallet
- * - User connects wallet initially
- */
 async function refreshAccountData() {
-
   document.getElementById("disconnect").style.display = "inline";
+  document.getElementById("connect").style.display = "none";
 
-  // Disable button while UI is loading.
-  // fetchAccountData() will take a while as it communicates
-  // with Ethereum node via JSON-RPC and loads chain data
-  // over an API call.
   document.querySelector("#disconnect").setAttribute("disabled", "disabled")
   await fetchAccountData(provider);
   document.querySelector("#disconnect").removeAttribute("disabled")
 }
 
 
-/**
- * Connect wallet button pressed.
- */
 async function onConnect() {
-
   console.log("Opening a dialog", web3Modal);
   try {
     provider = await web3Modal.connect();
+
     const web3 = new Web3(provider);
     const accounts = await web3.eth.getAccounts();
     if (accounts !== null) {
@@ -418,31 +386,30 @@ async function onConnect() {
     fetchAccountData();
   });
 
+  provider.on("connect", (chainId) => {
+    localStorage.setItem("walletProvider") = JSON.stringify(provider);
+  });
+
+  provider.on("disconnect", (code, message) => {
+    onDisconnect();
+  });
+
   await refreshAccountData();
 }
 
-/**
- * Disconnect wallet button pressed.
- */
 async function onDisconnect() {
+  console.log("Killing the wallet connection");
 
-  // console.log("Killing the wallet connection", provider);
+  // await web3Modal.clearCachedProvider();
+  // provider = null;
 
-  // // TODO: Which providers have close method?
-  // if(provider.close) {
-  //   await provider.close();
-
-  //   // If the cached provider is not cleared,
-  //   // WalletConnect will default to the existing session
-  //   // and does not allow to re-scan the QR code with a new wallet.
-  //   // Depending on your use case you may want or want not his behavir.
-  //   await web3Modal.clearCachedProvider();
-  //   provider = null;
-  // }
-
-  await web3Modal.clearCachedProvider();
+  provider = null;
+  localStorage.setItem("walletProvider") = null;
 
   selectedAccount = null;
+
+  document.getElementById('disconnect').style.display = "none";
+  document.getElementById('connect').style.display = "inline";
 }
 
 /**
@@ -450,16 +417,18 @@ async function onDisconnect() {
  */
 window.addEventListener('load', async () => {
   init();
-
-  document.getElementById('disconnect').addEventListener("click", onDisconnect())
-
-  var modal = document.getElementById("signUpModal");
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+  document.querySelector("#connect").addEventListener("click", onConnect);
+  document.querySelector("#disconnect").addEventListener("click", onDisconnect);
 });
+
+
+
+
+
+
+
+
+
+
+
 
