@@ -71,12 +71,11 @@ async function init() {
   // }
   console.log("test")
   if (localStorage.getItem("walletProvider") !== null && localStorage.getItem("walletProvider") !== "") {
-    console.log(localStorage.getItem("walletProvider"))
+    console.log("cache exists")
+    console.log("provider ", localStorage.getItem("walletProvider"))
     provider = JSON.parse(localStorage.getItem("walletProvider"));
-    console.log(provider)
   }
 
-  document.getElementById("connect").style.display = "inline";
   console.log("Web3Modal instance is", web3Modal);
 }
 
@@ -383,10 +382,12 @@ async function onConnect() {
   });
 
   provider.on("connect", (chainId) => {
+    console.log("connected")
     localStorage.setItem("walletProvider", JSON.stringify(provider));
-    console.log(provider)
-    console.log(JSON.stringify(provider))
-    console.log(localStorage.getItem("walletProvider"))
+    console.log("provider", provider)
+    console.log("provider string", JSON.stringify(provider))
+    console.log(l"provider storage", localStorage.getItem("walletProvider"))
+    document.getElementById("connect").style.display = "inline";
   });
 
   provider.on("disconnect", (code, message) => {
