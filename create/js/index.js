@@ -74,6 +74,7 @@ async function init() {
     console.log("cache exists")
     console.log("provider ", localStorage.getItem("walletProvider"))
     provider = JSON.parse(localStorage.getItem("walletProvider"));
+    console.log(provider)
   }
 
   document.getElementById("connect").style.display = "inline";
