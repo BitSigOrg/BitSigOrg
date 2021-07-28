@@ -69,7 +69,7 @@ async function init() {
   // if (web3Modal.cachedProvider) {
   //   onConnect();
   // }
-  if (localStorage.getItem("walletProvider") !== null) {
+  if (localStorage.getItem("walletProvider") !== null && localStorage.getItem("walletProvider") !== "") {
     console.log(localStorage.getItem("walletProvider"))
     provider = JSON.parse(localStorage.getItem("walletProvider"));
     console.log(provider)
@@ -381,11 +381,6 @@ async function onConnect() {
     fetchAccountData();
   });
 
-  // Subscribe to networkId change
-  provider.on("networkChanged", (networkId) => {
-    fetchAccountData();
-  });
-
   provider.on("connect", (chainId) => {
     localStorage.setItem("walletProvider") = JSON.stringify(provider);
   });
@@ -404,7 +399,7 @@ async function onDisconnect() {
   // provider = null;
 
   provider = null;
-  localStorage.setItem("walletProvider") = null;
+  localStorage.setItem("walletProvider") = "";
 
   selectedAccount = null;
 
