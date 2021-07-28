@@ -386,7 +386,7 @@ async function onConnect() {
     localStorage.setItem("walletProvider", JSON.stringify(provider));
     console.log("provider", provider)
     console.log("provider string", JSON.stringify(provider))
-    console.log(l"provider storage", localStorage.getItem("walletProvider"))
+    console.log("provider storage", localStorage.getItem("walletProvider"))
     document.getElementById("connect").style.display = "inline";
   });
 
