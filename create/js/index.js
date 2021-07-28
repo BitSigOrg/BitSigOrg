@@ -76,6 +76,8 @@ async function init() {
     provider = JSON.parse(localStorage.getItem("walletProvider"));
   }
 
+  document.getElementById("connect").style.display = "inline";
+
   console.log("Web3Modal instance is", web3Modal);
 }
 
@@ -387,7 +389,6 @@ async function onConnect() {
     console.log("provider", provider)
     console.log("provider string", JSON.stringify(provider))
     console.log("provider storage", localStorage.getItem("walletProvider"))
-    document.getElementById("connect").style.display = "inline";
   });
 
   provider.on("disconnect", (code, message) => {
