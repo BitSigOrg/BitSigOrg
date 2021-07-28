@@ -111,7 +111,12 @@ async function fetchAccountData() {
 
   console.log(selectedAccount);
 
+  localStorage.setItem("test", "ttttt");
   localStorage.setItem("walletProvider", JSON.stringify(provider));
+  console.log("provider", provider)
+  console.log("provider string", JSON.stringify(provider))
+  console.log("provider storage", localStorage.getItem("walletProvider"))
+
 
   console.log("----") 
   // https://cryptobook.nakov.com/crypto-libraries-for-developers/javascript-crypto-libraries prob the best
@@ -388,9 +393,7 @@ async function onConnect() {
   provider.on("connect", (chainId) => {
     console.log("connected")
     localStorage.setItem("walletProvider", JSON.stringify(provider));
-    console.log("provider", provider)
-    console.log("provider string", JSON.stringify(provider))
-    console.log("provider storage", localStorage.getItem("walletProvider"))
+    
   });
 
   provider.on("disconnect", (code, message) => {
