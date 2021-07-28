@@ -69,13 +69,13 @@ async function init() {
   // if (web3Modal.cachedProvider) {
   //   onConnect();
   // }
-  console.log("test")
-  if (localStorage.getItem("walletProvider") !== null && localStorage.getItem("walletProvider") !== "") {
-    console.log("cache exists")
-    console.log("provider ", localStorage.getItem("walletProvider"))
-    provider = JSON.parse(localStorage.getItem("walletProvider"));
-    console.log(provider)
-  }
+  // console.log("test")
+  // if (localStorage.getItem("walletProvider") !== null && localStorage.getItem("walletProvider") !== "") {
+  //   console.log("cache exists")
+  //   console.log("provider ", localStorage.getItem("walletProvider"))
+  //   provider = JSON.parse(localStorage.getItem("walletProvider"));
+  //   console.log(provider)
+  // }
 
   document.getElementById("connect").style.display = "inline";
 
@@ -129,11 +129,11 @@ async function fetchAccountData() {
 
   console.log(selectedAccount);
 
-  localStorage.setItem("test", "ttttt");
-  localStorage.setItem("walletProvider", simpleStringify(provider));
-  console.log("provider", provider)
-  console.log("provider string", simpleStringify(provider))
-  console.log("provider storage", localStorage.getItem("walletProvider"))
+  // localStorage.setItem("test", "ttttt");
+  // localStorage.setItem("walletProvider", simpleStringify(provider));
+  // console.log("provider", provider)
+  // console.log("provider string", simpleStringify(provider))
+  // console.log("provider storage", localStorage.getItem("walletProvider"))
 
 
   console.log("----") 
@@ -410,7 +410,7 @@ async function onConnect() {
 
   provider.on("connect", (chainId) => {
     console.log("connected")
-    localStorage.setItem("walletProvider", JSON.stringify(provider));
+    // localStorage.setItem("walletProvider", JSON.stringify(provider));
     
   });
 
@@ -428,7 +428,7 @@ async function onDisconnect() {
   // provider = null;
 
   provider = null;
-  localStorage.setItem("walletProvider", null);
+  // localStorage.setItem("walletProvider", null);
 
   selectedAccount = null;
 

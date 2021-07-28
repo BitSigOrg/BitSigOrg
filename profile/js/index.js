@@ -66,9 +66,9 @@ async function init() {
   // if (web3Modal.cachedProvider) {
   //   onConnect();
   // }
-  if (localStorage.getItem("walletProvider") !== null) {
-    provider = JSON.parse(localStorage.getItem("walletProvider"));
-  }
+  // if (localStorage.getItem("walletProvider") !== null) {
+  //   provider = JSON.parse(localStorage.getItem("walletProvider"));
+  // }
 
   document.getElementById("connect").style.display = "inline";
   console.log("Web3Modal instance is", web3Modal);
@@ -182,11 +182,11 @@ async function onConnect() {
   });
 
   provider.on("connect", (chainId) => {
-    localStorage['walletProvider'] = JSON.stringify(provider);
+    // localStorage['walletProvider'] = JSON.stringify(provider);
   });
 
   provider.on("connect", (chainId) => {
-    localStorage.setItem("walletProvider", JSON.stringify(provider));
+    // localStorage.setItem("walletProvider", JSON.stringify(provider));
   });
 
   provider.on("disconnect", (code, message) => {
@@ -201,7 +201,7 @@ async function onDisconnect() {
 
   // await web3Modal.clearCachedProvider();
   provider = null;
-  localStorage.setItem("walletProvider", null);
+  // localStorage.setItem("walletProvider", null);
 
   selectedAccount = null;
 
