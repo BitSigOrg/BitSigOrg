@@ -38,7 +38,7 @@ var signedMessage;
 var firebaseUID = "";
 var twitterUsername = "";
 
-let bitsig_contract_address = "0xf0823E8fDe3ff52c7Ef91C680B2DA3C03c7404D5"
+let bitsig_contract_address = "0x983fD6909F2eb2CE7e30De18C5B882fA78952B09"
 
 
 /**
