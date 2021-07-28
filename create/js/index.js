@@ -273,11 +273,11 @@ async function mintNFT() {
 
     if (address !== null && address !== "") {
       signer_addresses.push(address)
-      addresses_values.push(parseFloat(amount))
+      addresses_values.push(web3.utils.toWei(amount.toString(), "ether"));
     }
     else if (twitter !== null && twitter !== "") {
       signer_twitters.push(twitter)
-      twitter_values.push(parseFloat(amount))
+      twitter_values.push(web3.utils.toWei(amount.toString(), "ether"));
     }
     totalAmount += parseFloat(amount);
   }
@@ -316,33 +316,28 @@ async function mintNFT() {
           let hash = this.response;
           console.log(hash)
 
+          var totalAmountWei = web3.utils.toWei(totalAmount.toString(), "ether")
+
           // file uploaded, now we can set that as the tokenURI
           var contract = new web3.eth.Contract([{"inputs":[{"internalType":"address[]","name":"_allowedSigners","type":"address[]"},{"internalType":"uint256[]","name":"_amountForEach","type":"uint256[]"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"addAllowedSigners","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"hash","type":"bytes32"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"addSignature","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_reservedSigner","type":"string"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"increaeAmountForReserved","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"_allowedSigner","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"increaseAmountForApproved","outputs":[],"stateMutability":"payable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"inputs":[],"name":"pause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Paused","type":"event"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"tokenURI_","type":"string"},{"internalType":"address[]","name":"_allowedSigners","type":"address[]"},{"internalType":"uint256[]","name":"_amountForEach","type":"uint256[]"},{"internalType":"string[]","name":"_reservedSigners","type":"string[]"},{"internalType":"uint256[]","name":"_amountForEachReserved","type":"uint256[]"},{"internalType":"address","name":"_externalNftContractAddress","type":"address"},{"internalType":"uint256","name":"_externalTokenId","type":"uint256"}],"name":"safeMint","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_reservedSigner","type":"string"},{"internalType":"address","name":"_signerAddress","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"setAddressForReserved","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"unpause","outputs":[],"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"account","type":"address"}],"name":"Unpaused","type":"event"},{"inputs":[{"internalType":"address","name":"_allowedSigner","type":"address"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"withdrawAllowedSigner","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_reservedSigner","type":"string"},{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"withdrawReservedSigner","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_externalNftContractAddress","type":"address"},{"internalType":"uint256","name":"_externalTokenId","type":"uint256"}],"name":"getTokenIdOfWrappedNFT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"getTokenSigners","outputs":[{"internalType":"address[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"paused","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"string","name":"","type":"string"}],"name":"reservedSignerPayouts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"signerPayouts","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"tokenSignDate","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"tokenSigners","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}]
             , bitsig_contract_address);
-          console.log("test 1")
           var safeMint = contract.methods.safeMint("ipfs://" + hash, signer_addresses, addresses_values, signer_twitters, twitter_values, wrapped_nft.asset_contract.address, wrapped_nft.token_id).encodeABI();
-          console.log("test 2")
 
           // Chain ID of Ropsten Test Net is 3, replace it to 1 for Main Net
-          // var chainId = 3;
-          // console.log("value to send")
-          // console.log(totalAmount.toString())
-          // var inWei = web3.utils.toWei(totalAmount.toString(), "ether")
-          // console.log("Wei:")
-          // console.log(inWei)
-          // web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: inWei, data: safeMint, "chainId": chainId})
-          // .on('transactionHash', function(hash){
-          //   console.log("hash")
-          //   console.log(hash)
-          // })
-          // .on('receipt', function(receipt){
-          //   console.log("receipt")
-          //   console.log(receipt)
-          // })
-          // .on('confirmation', function(confirmationNumber, receipt){ 
+          var chainId = 3;
+          web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: totalAmountWei, data: safeMint, "chainId": chainId})
+          .on('transactionHash', function(hash){
+            console.log("hash")
+            console.log(hash)
+          })
+          .on('receipt', function(receipt){
+            console.log("receipt")
+            console.log(receipt)
+          })
+          .on('confirmation', function(confirmationNumber, receipt){ 
 
-          // })
-          // .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
+          })
+          .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
 
         }
         var metadata_params = {
