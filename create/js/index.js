@@ -324,25 +324,25 @@ async function mintNFT() {
           console.log("test 2")
 
           // Chain ID of Ropsten Test Net is 3, replace it to 1 for Main Net
-          var chainId = 3;
-          console.log("value to send")
-          console.log(totalAmount.toString())
-          var inWei = web3.utils.toWei(totalAmount.toString(), "ether")
-          console.log("Wei:")
-          console.log(inWei)
-          web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: inWei, data: safeMint, "chainId": chainId})
-          .on('transactionHash', function(hash){
-            console.log("hash")
-            console.log(hash)
-          })
-          .on('receipt', function(receipt){
-            console.log("receipt")
-            console.log(receipt)
-          })
-          .on('confirmation', function(confirmationNumber, receipt){ 
+          // var chainId = 3;
+          // console.log("value to send")
+          // console.log(totalAmount.toString())
+          // var inWei = web3.utils.toWei(totalAmount.toString(), "ether")
+          // console.log("Wei:")
+          // console.log(inWei)
+          // web3.eth.sendTransaction({to:bitsig_contract_address, from:account, value: inWei, data: safeMint, "chainId": chainId})
+          // .on('transactionHash', function(hash){
+          //   console.log("hash")
+          //   console.log(hash)
+          // })
+          // .on('receipt', function(receipt){
+          //   console.log("receipt")
+          //   console.log(receipt)
+          // })
+          // .on('confirmation', function(confirmationNumber, receipt){ 
 
-          })
-          .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
+          // })
+          // .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
 
         }
         var metadata_params = {
