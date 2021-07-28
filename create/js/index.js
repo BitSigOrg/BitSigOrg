@@ -85,6 +85,23 @@ var num_signers = 1
 var assets = []
 var wrapped_nft;
 
+function simpleStringify (object){
+    var simpleObject = {};
+    for (var prop in object ){
+        if (!object.hasOwnProperty(prop)){
+            continue;
+        }
+        if (typeof(object[prop]) == 'object'){
+            continue;
+        }
+        if (typeof(object[prop]) == 'function'){
+            continue;
+        }
+        simpleObject[prop] = object[prop];
+    }
+    return JSON.stringify(simpleObject); // returns cleaned up JSON
+};
+
 /**
  * Kick in the UI action after Web3modal dialog has chosen a provider
  */
@@ -112,9 +129,9 @@ async function fetchAccountData() {
   console.log(selectedAccount);
 
   localStorage.setItem("test", "ttttt");
-  localStorage.setItem("walletProvider", JSON.stringify(provider));
+  localStorage.setItem("walletProvider", JSON.simpleStringify(provider));
   console.log("provider", provider)
-  console.log("provider string", JSON.stringify(provider))
+  console.log("provider string", JSON.simpleStringify(provider))
   console.log("provider storage", localStorage.getItem("walletProvider"))
 
 
