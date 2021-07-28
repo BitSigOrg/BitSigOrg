@@ -382,7 +382,7 @@ async function onConnect() {
   });
 
   provider.on("connect", (chainId) => {
-    localStorage.setItem("walletProvider") = JSON.stringify(provider);
+    localStorage.setItem("walletProvider", JSON.stringify(provider));
   });
 
   provider.on("disconnect", (code, message) => {
@@ -399,7 +399,7 @@ async function onDisconnect() {
   // provider = null;
 
   provider = null;
-  localStorage.setItem("walletProvider") = "";
+  localStorage.setItem("walletProvider", null);
 
   selectedAccount = null;
 
