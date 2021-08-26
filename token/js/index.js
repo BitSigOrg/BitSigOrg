@@ -1,5 +1,9 @@
 "use strict";
 
+// https://youtu.be/Oz9cz4Mh5xM?t=2808
+
+// https://opensea.io/RobGronkowski
+
 var firebaseConfig = {
     apiKey: "AIzaSyB7aosAnOr4k0lgPPlR11vAA267hhEqh64",
     authDomain: "bitsig-21bf7.firebaseapp.com",
@@ -115,6 +119,9 @@ async function fetchAccountData() {
 
   console.log("----")
 
+  document.getElementById("mintButton").style.display = "block";
+  document.getElementById("connectToMint").style.display = "none";
+
   document.getElementById("disconnect").style.display = "inline";
 }
 
@@ -133,10 +140,10 @@ async function onConnect() {
   console.log("Opening a dialog", web3Modal);
   try {
     provider = await web3Modal.connect();
-
+    console.log("provider", provider)
     const web3 = new Web3(provider);
     const accounts = await web3.eth.getAccounts();
-    if (accounts !== null) {
+    if (accounts !== null && accounts !== undefined) {
       console.log(accounts[0])
     }
   } catch(e) {
@@ -206,7 +213,7 @@ window.addEventListener('load', async () => {
 
       document.getElementById("nft-form").innerHTML = ""
       var html = '<div class="row mx-auto mb-4 mt-0">'
-      html += '<div class="nft col-lg-11 col-md-11 text-center my-auto mx-auto">'
+      html += '<div class="nft col-lg-11 col-md-11 col-sm-11 text-center my-auto mx-auto">'
       if (nft.image_original_url != null) {
         html += '<div class="text-center my-auto"><img class="nft-image" src="' + nft.image_original_url + '"/></div>'
       }
@@ -219,7 +226,7 @@ window.addEventListener('load', async () => {
       
       if (nft.asset_contract.address.toLowerCase() === bitsig_contract_address.toLowerCase()) {
         let metadata_url = wrapped_nft.token_metadata
-        if (metadata_url !== null) {
+        if (metadata_url !== null && metadata_url !== undefined) {
           var request_metadata = new XMLHttpRequest()
           request_metadata.open('GET', metadata_url, true)
           request_metadata.onload = function () {
@@ -237,7 +244,15 @@ window.addEventListener('load', async () => {
           request_metadata.send()
         }
         html += '<div class="text-center my-auto" style="padding-top: 15px;"><p><strong>Wrapped NFT: <a href="https://testnets.opensea.io/assets/' + nft.asset_contract.address + "/" + nft.token_id + '" target="_blank"></strong><br/>View on OpenSea</a></p></div>'
-        html += '<div class="text-center my-auto" style="padding-top: 40px;"><button onclick="mintNFT()" class="gradient-button">Sign</button></div>'
+        
+        if (provider !== undefined) {
+          html += '<div id="mintButton" class="text-center my-auto" style="padding-top: 40px; display: block;"><button onclick="mintNFT()" class="gradient-button">Sign</button></div>'
+          html += '<div id="connectToMint" class="text-center my-auto" style="padding-top: 40px; display: none;"><p>Connect Wallet to Sign</p></div>'
+        }
+        else {
+          html += '<div id="mintButton" class="text-center my-auto" style="padding-top: 40px; display: none;"><button onclick="mintNFT()" class="gradient-button">Sign</button></div>'
+          html += '<div id="connectToMint" class="text-center my-auto" style="padding-top: 40px; display: block;"><p>Connect Wallet to Sign</p></div>'
+        }
       }
       html += '</div></div>'
       document.getElementById("nft-form").innerHTML = html
